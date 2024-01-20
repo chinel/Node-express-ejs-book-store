@@ -1,0 +1,30 @@
+{
+  "name": "express-ejs-book-store",
+  "version": "1.0.0",
+  "description": "Node js Express online book store with Ejs Templating ",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "start": "node server",
+    "start-dev":"nodemon server"
+  },
+  "keywords": [
+    "Node",
+    "js",
+    "Rest",
+    "Api",
+    "Service",
+    "NodeJS",
+    "RestAPI"
+  ],
+  "author": "Nelly",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3"
+  }
+}

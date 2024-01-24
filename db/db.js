@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 
 const DB_URL = process.env.DB_URL;
 const connect = async () => {
+  console.log("Connected to MongoDb");
   await mongoose.connect(DB_URL);
 };
 
@@ -16,7 +17,7 @@ const findUser = async (obj) => {
 };
 
 const saveUser = async (newUser) => {
-  return User.updateOne(newUser);
+  return newUser.save();
 };
 
 module.exports = {

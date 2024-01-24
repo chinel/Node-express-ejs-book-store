@@ -43,7 +43,7 @@ const registerUserHandler = (req, res, next) => {
       }
     })
     .catch((err) => {
-      return res.status(err.status).json({
+      return res.status(err.status || 501).json({
         error: {
           message: err.message,
           status: err.status,

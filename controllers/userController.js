@@ -1,7 +1,10 @@
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const { findUser, saveUser } = require("../db/db");
 const User = require("../models/userModel");
-const mongoose = require("mongoose");
+const errorTemplate = require("../templates/errorTemplate");
 
 const registerUserHandler = (req, res, next) => {
   //find User
@@ -38,20 +41,58 @@ const registerUserHandler = (req, res, next) => {
               user: dbUser,
             });
           }
-          // Store hash in your password DB.
         });
       }
     })
     .catch((err) => {
-      return res.status(err.status || 501).json({
-        error: {
-          message: err.message,
-          status: err.status,
-        },
-      });
+      errorTemplate(res, err, "Cannot save user");
     });
+};
+
+const loginUserHandler = async (req, res, next) => {
+  try {
+    //email and password
+    //Find the user return the user
+    const loggedInUser = await findUser({ email: req.body.email });
+    //if the user is not found return response saying authentication failed
+    if (!loggedInUser) {
+      throw new Error("Authentication Failed: Unable to find user");
+    } else {
+      //else use bcrypt to compare password
+      const result = await bcrypt.compare(
+        req.body.password,
+        loggedInUser.password
+      );
+      //if result
+      if (result) {
+        loggedInUser.password = null;
+        //if result create a JSON web Token, then return response stating authentication successful and token,
+        const token = jwt.sign({ user: loggedInUser }, process.env.JWT_SECRET);
+
+        return res.status(200).json({
+          user: loggedInUser,
+          loggedIn: true,
+          token,
+          message: "Login Successful",
+        });
+      } else {
+        //return response stating authentication failed
+        throw new Error(
+          "Authentication Failed: Email or Password does not match"
+        );
+      }
+      //return err or result (True or false)
+      // if err return response stating authentication failed
+      // else test the result with if statement
+      //if err generating JSON web token return authentication failed
+      //else if not result return response stating authentication failed
+    }
+  } catch (err) {
+    errorTemplate(res, err, err.message);
+  }
 };
 
 module.exports = {
   registerUserHandler,
+  loginUserHandler,
 };

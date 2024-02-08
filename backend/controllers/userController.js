@@ -24,6 +24,7 @@ const registerUserHandler = (req, res, next) => {
 
         //encrypt the password
         //the second parameter of the hash method can either be a hash or a number which specifies the number of rounds that will be used to generate the salt
+        //note that this second call back function is not needed if we will be using await, it will just be const hash = await bcrypt.hash(password, 10), with try catch, the catch block will handle the error thrown
         bcrypt.hash(newUser.password, 10, async function (err, hash) {
           if (err) {
             return res.status(501).json({
@@ -56,7 +57,9 @@ const loginUserHandler = async (req, res, next) => {
     const loggedInUser = await findUser({ email: req.body.email });
     //if the user is not found return response saying authentication failed
     if (!loggedInUser) {
-      throw new Error("Authentication Failed: Unable to find user");
+      const error = new Error("Authentication Failed: Unable to find user");
+      error.status = 401;
+      throw error;
     } else {
       //else use bcrypt to compare password
       const result = await bcrypt.compare(

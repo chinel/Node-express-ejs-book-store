@@ -10,6 +10,8 @@ app.use(cors());
 //json request
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
 //middleware templating
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);

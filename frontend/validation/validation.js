@@ -11,6 +11,7 @@ const validateRegistration = (body) => {
     password,
     confirmPassword,
   } = body;
+  console.log(body);
   if (firstName.trim().length < 2 || !/^[A-Za-z]+$/.test(firstName.trim())) {
     errors.firstNameMsg = "First Name is required";
   }
@@ -34,7 +35,7 @@ const validateRegistration = (body) => {
     errors.stateMsg = "State must be 2 characters";
   }
 
-  if (zipCode.trim().length < 2 || !/^\d{5}]+$/.test(zipCode.trim())) {
+  if (!/^\d{5}$/.test(zipCode.trim())) {
     errors.zipCodeMsg = "Zip Code format is 12345";
   }
 
@@ -47,13 +48,14 @@ const validateRegistration = (body) => {
 
   if (
     password.trim().length === 0 ||
-    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}+$/.test(password.trim())
+    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password.trim())
   ) {
-    errors.passwordMsg = "Password must be 8 characters or more";
+    errors.passwordMsg =
+      "Password must contain a letters and numbers 8 characters or more";
   }
 
   if (confirmPassword.trim() !== password.trim()) {
-    errors.confirmPasswordMsg = "passwords must be the same";
+    errors.confirmPasswordMsg = "Passwords must be the same";
   }
 
   return errors;

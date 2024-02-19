@@ -17,13 +17,21 @@ router.get("/register", (req, res) => {
 
 router.post("/register", (req, res) => {
   const errors = validateRegistration(req.body);
+  console.log("errors", errors);
+  console.log("isEmpty", isEmpty(errors));
   if (isEmpty(errors)) {
     res.render("login", {
       pagename: "Login",
       message: messages.successful_registration,
     });
+  } else {
+    res.render("register", {
+      pagename: "Register",
+      errors,
+      body: req.body,
+      message: messages.failed_registration,
+    });
   }
-  res.render("home", { pagename: "Home" });
 });
 
 router.post("/login", (req, res) => {

@@ -38,114 +38,117 @@
           <div class="col-md-10 col-lg-6 mx-auto text-center">
             <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
             <h2 class="text-white mb-5">Register</h2>
-
+            <% if (typeof(message) !== "undefined") { %>
+            <div class="alert alert-danger me-4"><%= message %></div>
+            <% } %>
             <form
               class="form-signup"
               id="contactForm"
-              action="/register"
-              method="post"
+              action="register"
+              method="POST"
             >
               <div class="row input-group-newsletter gap-4">
                 <div class="row">
-                  <input
-                    class="form-control"
-                    id="firstName"
-                    type="text"
-                    placeholder="Enter First Name..."
-                    aria-label="Enter First Name..."
-                    name="firstName"
-                    data-sb-validations="required"
-                  />
+                  <input class="form-control" id="firstName" type="text"
+                  placeholder="Enter First Name..." aria-label="Enter First
+                  Name..." name="firstName" <% if(typeof(body) !== "undefined")
+                  {%> value="<%= body.firstName%>" <%}%> /> <% if(typeof(errors)
+                  !== "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.firstNameMsg %>
+                  </p>
+                  <% } %>
                 </div>
                 <div class="row">
-                  <input
-                    class="form-control"
-                    id="lastName"
-                    type="text"
-                    placeholder="Enter Last Name..."
-                    aria-label="Enter Last Name..."
-                    name="lastName"
-                    data-sb-validations="required"
-                  />
-                </div>
-
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="address"
-                    type="text"
-                    placeholder="Enter address..."
-                    aria-label="Enter address..."
-                    name="address"
-                    data-sb-validations="required"
-                  />
-                </div>
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="city"
-                    type="text"
-                    placeholder="Enter city..."
-                    aria-label="Enter city..."
-                    name="city"
-                    data-sb-validations="required"
-                  />
-                </div>
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="state"
-                    type="text"
-                    placeholder="Enter state..."
-                    aria-label="Enter state..."
-                    name="state"
-                    data-sb-validations="required"
-                  />
-                </div>
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="zipCode"
-                    type="text"
-                    placeholder="Enter zip code..."
-                    aria-label="Enter zip code..."
-                    name="zipCode"
-                    data-sb-validations="required"
-                  />
-                </div>
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="emailAddress"
-                    type="email"
-                    placeholder="Enter email address..."
-                    aria-label="Enter email address..."
-                    name="email"
-                    data-sb-validations="required,email"
-                  />
-                </div>
-                <div class="row">
-                  <input
-                    class="form-control"
-                    id="password"
-                    type="password"
-                    placeholder="Enter Password..."
-                    aria-label="Enter Password..."
-                    name="email"
-                    data-sb-validations="required"
-                  />
+                  <input class="form-control" id="lastName" type="text"
+                  placeholder="Enter Last Name..." aria-label="Enter Last
+                  Name..." name="lastName" <% if(typeof(body) !== "undefined")
+                  {%> value="<%= body.lastName%>" <%}%> /> <% if(typeof(errors)
+                  !== "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.lastNameMsg %>
+                  </p>
+                  <% } %>
                 </div>
 
                 <div class="row">
-                  <input
-                    class="form-control"
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="Confirm Password..."
-                    aria-label="Confirm Password..."
-                    name="confirmPassword"
-                    data-sb-validations="required"
-                  />
+                  <input class="form-control" id="address" type="text"
+                  placeholder="Enter address..." aria-label="Enter address..."
+                  name="address" <% if(typeof(body) !== "undefined") {%>
+                  value="<%= body.address%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.addressMsg %>
+                  </p>
+                  <% } %>
+                </div>
+                <div class="row">
+                  <input class="form-control" id="city" type="text"
+                  placeholder="Enter city..." aria-label="Enter city..."
+                  name="city" <% if(typeof(body) !== "undefined") {%> value="<%=
+                  body.city%>" <%}%> /> <% if(typeof(errors) !== "undefined"){
+                  %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.cityMsg %>
+                  </p>
+                  <% } %>
+                </div>
+                <div class="row">
+                  <input class="form-control" id="state" type="text"
+                  placeholder="Enter state..." aria-label="Enter state..."
+                  name="state" <% if(typeof(body) !== "undefined") {%>
+                  value="<%= body.state%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.stateMsg %>
+                  </p>
+                  <% } %>
+                </div>
+                <div class="row">
+                  <input class="form-control" id="zipCode" type="text"
+                  placeholder="Enter zip code..." aria-label="Enter zip code..."
+                  name="zipCode" <% if(typeof(body) !== "undefined") {%>
+                  value="<%= body.zipCode%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.zipCodeMsg %>
+                  </p>
+                  <% } %>
+                </div>
+                <div class="row">
+                  <input class="form-control" id="emailAddress" type="email"
+                  placeholder="Enter email address..." aria-label="Enter email
+                  address..." name="email" <% if(typeof(body) !== "undefined")
+                  {%> value="<%= body.email%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.emailMsg %>
+                  </p>
+                  <% } %>
+                </div>
+                <div class="row">
+                  <input class="form-control" id="password" type="password"
+                  placeholder="Enter Password..." aria-label="Enter Password..."
+                  name="password" <% if(typeof(body) !== "undefined") {%>
+                  value="<%= body.password%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.passwordMsg %>
+                  </p>
+                  <% } %>
+                </div>
+
+                <div class="row">
+                  <input class="form-control" id="confirmPassword"
+                  type="password" placeholder="Confirm Password..."
+                  aria-label="Confirm Password..." name="confirmPassword" <%
+                  if(typeof(body) !== "undefined") {%> value="<%=
+                  body.confirmPassword%>" <%}%> /> <% if(typeof(errors) !==
+                  "undefined"){ %>
+                  <p class="text-start text-red fw-semibold mb-0">
+                    <%= errors.confirmPasswordMsg %>
+                  </p>
+                  <% } %>
                 </div>
 
                 <div class="row">

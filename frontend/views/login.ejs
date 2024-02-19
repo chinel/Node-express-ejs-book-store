@@ -38,7 +38,9 @@
           <div class="col-md-10 col-lg-6 mx-auto text-center">
             <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
             <h2 class="text-white mb-5">Login!</h2>
-
+            <% if (typeof(message) !== "undefined") { %>
+            <div class="alert alert-success me-4"><%= message %></div>
+            <% } %>
             <form
               class="form-signup"
               id="contactForm"

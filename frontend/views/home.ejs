@@ -37,6 +37,9 @@
       >
         <div class="d-flex justify-content-center">
           <div class="text-center">
+            <% if (typeof(message) !== "undefined") { %>
+            <div class="alert alert-success me-4"><%= message %></div>
+            <% } %>
             <h1 class="mx-auto my-0 text-uppercase">Grayscale</h1>
             <h2 class="text-white-50 mx-auto mt-2 mb-5">
               A free, responsive, one page Bootstrap theme created by Start

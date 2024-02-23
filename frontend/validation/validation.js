@@ -61,6 +61,23 @@ const validateRegistration = (body) => {
   return errors;
 };
 
+const validateLogin = (body) => {
+  let errors = {};
+  const { email, password } = body;
+  if (
+    email.trim() === "" ||
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim())
+  ) {
+    errors.emailMsg = "Invalid Email Address";
+  }
+
+  if (password.trim().length === 0) {
+    errors.passwordMsg = "Enter Password";
+  }
+  return errors;
+};
+
 module.exports = {
   validateRegistration,
+  validateLogin,
 };

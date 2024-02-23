@@ -1,5 +1,8 @@
 const express = require("express");
-const { validateRegistration } = require("../validation/validation");
+const {
+  validateRegistration,
+  validateLogin,
+} = require("../validation/validation");
 const { isEmpty, messages } = require("../utilities/utils");
 const router = express.Router();
 
@@ -17,8 +20,6 @@ router.get("/register", (req, res) => {
 
 router.post("/register", (req, res) => {
   const errors = validateRegistration(req.body);
-  console.log("errors", errors);
-  console.log("isEmpty", isEmpty(errors));
   if (isEmpty(errors)) {
     res.render("login", {
       pagename: "Login",
@@ -35,8 +36,21 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  console.log("Loggin in");
-  res.render("about", { pagename: "About" });
+  const errors = validateLogin(req.body);
+
+  if (isEmpty(errors)) {
+    res.render("home", {
+      pagename: "Home",
+      message: messages.successful_login,
+    });
+  } else {
+    res.render("login", {
+      pagename: "Login",
+      errors,
+      body: req.body,
+      message: messages.failed_login,
+    });
+  }
 });
 
 router.get("/login", (req, res) => {

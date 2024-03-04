@@ -4,6 +4,7 @@ const {
   validateLogin,
 } = require("../validation/validation");
 const { isEmpty, messages } = require("../utilities/utils");
+const { registerUser } = require("../services/userService");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -21,10 +22,25 @@ router.get("/register", (req, res) => {
 router.post("/register", (req, res) => {
   const errors = validateRegistration(req.body);
   if (isEmpty(errors)) {
-    res.render("login", {
-      pagename: "Login",
-      message: messages.successful_registration,
-    });
+    //call the backend
+    registerUser(req.body)
+      .then((result) => {
+        console.log(result);
+        res.render("login", {
+          pagename: "Login",
+          message: messages.successful_registration,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.render("register", {
+          pagename: "Register",
+          body: req.body,
+          message: err.response
+            ? err.response.data.message
+            : "Oops an error has occured",
+        });
+      });
   } else {
     res.render("register", {
       pagename: "Register",
@@ -39,6 +55,8 @@ router.post("/login", (req, res) => {
   const errors = validateLogin(req.body);
 
   if (isEmpty(errors)) {
+    //call the backend
+
     res.render("home", {
       pagename: "Home",
       message: messages.successful_login,

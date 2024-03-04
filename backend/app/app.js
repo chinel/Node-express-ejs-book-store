@@ -1,9 +1,25 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
 const userRouter = require("../routers/userRouter");
 const { connect } = require("../db/db");
 
+const NODE_ENV = process.env.NODE_ENV;
 const app = express();
+
+const logStream = fs.createWriteStream(
+  path.join(__dirname, "../logs/access.log"),
+  { flags: "a" }
+);
+
+//Middleware for loggin
+app.use(
+  NODE_ENV === "production"
+    ? morgan("combined", { stream: logStream })
+    : morgan("dev")
+);
 
 //middleware that parses json from incoming request
 //It also used to enforce a contract, if you only accept json, you should also ensure that you only return json

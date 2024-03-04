@@ -31,17 +31,17 @@ const validateRegistration = (body) => {
     errors.cityMsg = "City is required";
   }
 
-  if (state.trim().length < 2 || !/^[A-Za-z]+$/.test(state.trim())) {
-    errors.stateMsg = "State must be 2 characters";
+  if (state.trim().length < 2 || !/^[A-Za-z\s]+$/.test(state.trim())) {
+    errors.stateMsg = "Invalid State";
   }
 
-  if (!/^\d{5}$/.test(zipCode.trim())) {
-    errors.zipCodeMsg = "Zip Code format is 12345";
+  if (!/^\d{5,6}$/.test(zipCode.trim())) {
+    errors.zipCodeMsg = "Zip Code must be 5 to 6 numbers in length";
   }
 
   if (
     email.trim() === "" ||
-    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim())
+    !/^\w+([\.-]?\w+)*(\+\w+)?@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim())
   ) {
     errors.emailMsg = "Invalid Email Address";
   }

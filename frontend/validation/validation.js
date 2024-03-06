@@ -66,7 +66,7 @@ const validateLogin = (body) => {
   const { email, password } = body;
   if (
     email.trim() === "" ||
-    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim())
+    !/^\w+([\.-]?\w+)*(\+\w+)?@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim())
   ) {
     errors.emailMsg = "Invalid Email Address";
   }

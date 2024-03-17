@@ -37,8 +37,11 @@
       >
         <div class="d-flex justify-content-center">
           <div class="text-center">
-            <% if (typeof(message) !== "undefined") { %>
-            <div class="alert alert-success me-4"><%= message %></div>
+            <% if (typeof(session) !== "undefined" && typeof(session.name) !==
+            "undefined") { %>
+            <div class="me-4 text-capitalize welcome-message">
+              Welcome <%= session.name %>
+            </div>
             <% } %>
             <h1 class="mx-auto my-0 text-uppercase">Mini Book Store</h1>
             <h2 class="text-white-50 mx-auto mt-2 mb-5">

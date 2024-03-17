@@ -35,14 +35,15 @@ const registerUserHandler = (req, res, next) => {
             newUser.password = hash;
 
             //save the user to the database
-            const dbUser = await saveUser(newUser)
-              .then(() => {
+            saveUser(newUser)
+              .then((user) => {
                 return res.status(201).json({
                   message: "Successful Registration",
-                  user: dbUser,
+                  user,
                 });
               })
               .catch((err) => {
+                console.log(err);
                 errorTemplate(res, err, "Cannot save user");
               });
           }

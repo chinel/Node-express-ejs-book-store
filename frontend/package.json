@@ -4,7 +4,7 @@
   "description": "Node js Ejs Frontend",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "start": "node server",
     "start-dev": "nodemon server"
   },
@@ -26,6 +26,7 @@
     "express-session": "^1.18.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.0.3"
   }
 }

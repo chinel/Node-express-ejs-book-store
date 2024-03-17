@@ -11113,8 +11113,13 @@ body {
 
 .about-section {
   padding-top: 10rem;
-  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/bg-masthead.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
+
 .about-section p {
   margin-bottom: 5rem;
 }
@@ -11203,4 +11208,8 @@ body {
 
 .text-red{
   color: #ff0000;
+}
+
+.text-header{
+  font-size: 3.5rem;
 }

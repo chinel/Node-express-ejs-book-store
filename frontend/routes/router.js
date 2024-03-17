@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
 
 router.get("/about", (req, res) => {
   const session = req.session;
-  console.log("session--->", session);
   res.render("about", { pagename: "About", session });
 });
 
@@ -32,6 +31,11 @@ router.post("/login", postLoginHandler);
 
 router.get("/login", (req, res) => {
   res.render("login", { pagename: "Login" });
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy(null);
+  res.redirect("/");
 });
 
 module.exports = router;

@@ -6,11 +6,20 @@ const {
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("home", { pagename: "Home" });
+  const session = req.session;
+  const { message } = session;
+  req.session.message = null;
+  res.render("home", {
+    pagename: "Home",
+    session,
+    message: message || undefined,
+  });
 });
 
 router.get("/about", (req, res) => {
-  res.render("about", { pagename: "About" });
+  const session = req.session;
+  console.log("session--->", session);
+  res.render("about", { pagename: "About", session });
 });
 
 router.get("/register", (req, res) => {

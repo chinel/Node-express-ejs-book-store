@@ -37,6 +37,8 @@ const postRegistrationHandler = (req, res) => {
 };
 
 const postLoginHandler = (req, res) => {
+  const session = req.session;
+
   const errors = validateLogin(req.body);
 
   if (isEmpty(errors)) {
@@ -44,10 +46,12 @@ const postLoginHandler = (req, res) => {
     loginUser(req.body)
       .then((result) => {
         console.log(result);
-        res.render("home", {
-          pagename: "Home",
-          message: result.data.message,
-        });
+        session.name = result.data.user.firstName;
+        session.logged = result.data.loggedIn;
+        session.token = result.data.token;
+        session.message = result.data.message;
+
+        res.redirect("/");
       })
       .catch((err) => {
         console.log(err.response);

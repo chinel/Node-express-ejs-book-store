@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
 const userRouter = require("../routers/userRouter");
+const bookRouter = require("../routers/bookRouter");
 const { connect } = require("../db/db");
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -38,6 +39,7 @@ app.use("/health-check", (req, res) => {
 
 //routers
 app.use("/users", userRouter);
+app.use("/books", bookRouter);
 
 //Middleware to handle bad url or error
 app.use((req, res, next) => {

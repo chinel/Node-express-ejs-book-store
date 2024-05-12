@@ -1,39 +1,17 @@
 const express = require("express");
+const {
+  getAllBooks,
+  getBookById,
+  postBook,
+} = require("../controllers/bookController");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  return res.status(200).json({
-    message: "Successful - GET",
-    metadata: {
-      hostname: req.hostname,
-      method: req.method,
-    },
-  });
-});
+router.get("/", getAllBooks);
 
-router.get("/:id", (req, res, next) => {
-  return res.status(200).json({
-    message: "Successful - GET by Id",
-    metadata: {
-      id: req.params.id,
-      method: req.method,
-      hostname: req.hostname,
-    },
-  });
-});
+router.get("/:bookId", getBookById);
 
-router.post("/", (req, res, next) => {
-  const name = req.body.name;
-  return res.status(201).json({
-    message: "Successful - POST",
-    metadata: {
-      name,
-      hostname: req.hostname,
-      method: req.method,
-    },
-  });
-});
+router.post("/", postBook);
 
 router.put("/:id", (req, res, next) => {
   return res.status(200).json({

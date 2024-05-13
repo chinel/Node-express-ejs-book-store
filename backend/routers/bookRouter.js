@@ -1,30 +1,22 @@
 const express = require("express");
 const {
-  getAllBooks,
-  getBookById,
-  postBook,
+  getAllBooksHandler,
+  getBookByIdHandler,
+  postBookHandler,
+  updateBookHandler,
 } = require("../controllers/bookController");
 
 const router = express.Router();
 
-router.get("/", getAllBooks);
+router.get("/", getAllBooksHandler);
 
-router.get("/:bookId", getBookById);
+router.get("/:bookId", getBookByIdHandler);
 
-router.post("/", postBook);
+router.post("/", postBookHandler);
 
-router.put("/:id", (req, res, next) => {
-  return res.status(200).json({
-    message: "Successful - PUT by Id",
-    metadata: {
-      id: req.params.id,
-      method: req.method,
-      hostname: req.hostname,
-    },
-  });
-});
+router.put("/:bookId", updateBookHandler);
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:bookId", (req, res, next) => {
   return res.status(200).json({
     message: "Successful - DELETE by Id",
     metadata: {

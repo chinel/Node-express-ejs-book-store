@@ -1,11 +1,11 @@
 const { default: mongoose } = require("mongoose");
-const { findBooks, findBook, saveBook } = require("../db/bookDb");
+const { findBooks, findBook, saveBook, updateBook } = require("../db/bookDb");
 const Book = require("../models/bookModel");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
 const { messages } = require("../utils/utils");
 
-const getAllBooks = async (req, res) => {
+const getAllBooksHandler = async (req, res) => {
   try {
     const books = await findBooks({}, "-__v");
     successsTemplate(res, books, messages.books_found, 200);
@@ -14,7 +14,7 @@ const getAllBooks = async (req, res) => {
   }
 };
 
-const getBookById = async (req, res) => {
+const getBookByIdHandler = async (req, res) => {
   try {
     const book = await findBook({ _id: req.params.bookId }, "-__v");
     if (!book) {
@@ -27,7 +27,7 @@ const getBookById = async (req, res) => {
   }
 };
 
-const postBook = async (req, res) => {
+const postBookHandler = async (req, res) => {
   try {
     const book = new Book();
     const newBook = Object.assign(book, req.body);
@@ -48,8 +48,20 @@ const postBook = async (req, res) => {
   }
 };
 
+const updateBookHandler = async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    const data = req.body;
+    const result = await updateBook({ _id: id }, data);
+    successsTemplate(res, result, messages.book_updated, 200);
+  } catch (error) {
+    errorTemplate(res, error, error.message || messages.book_not_updated);
+  }
+};
+
 module.exports = {
-  getAllBooks,
-  getBookById,
-  postBook,
+  getAllBooksHandler,
+  getBookByIdHandler,
+  postBookHandler,
+  updateBookHandler,
 };

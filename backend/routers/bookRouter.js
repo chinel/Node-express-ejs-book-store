@@ -4,6 +4,7 @@ const {
   getBookByIdHandler,
   postBookHandler,
   updateBookHandler,
+  deleteBookHandler,
 } = require("../controllers/bookController");
 
 const router = express.Router();
@@ -16,15 +17,6 @@ router.post("/", postBookHandler);
 
 router.put("/:bookId", updateBookHandler);
 
-router.delete("/:bookId", (req, res, next) => {
-  return res.status(200).json({
-    message: "Successful - DELETE by Id",
-    metadata: {
-      id: req.params.id,
-      method: req.method,
-      hostname: req.hostname,
-    },
-  });
-});
+router.delete("/:bookId", deleteBookHandler);
 
 module.exports = router;

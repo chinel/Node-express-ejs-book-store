@@ -7,6 +7,8 @@ const messages = {
   book_exists: "Book already exists.",
   book_not_updated: "Unable to update book.",
   book_updated: "Book updated.",
+  book_deleted: "Book deleted.",
+  book_not_deleted: "Book not deleted.",
 };
 
 module.exports = { messages };

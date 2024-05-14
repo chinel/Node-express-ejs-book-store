@@ -1,5 +1,11 @@
 const { default: mongoose } = require("mongoose");
-const { findBooks, findBook, saveBook, updateBook } = require("../db/bookDb");
+const {
+  findBooks,
+  findBook,
+  saveBook,
+  updateBook,
+  deleteBook,
+} = require("../db/bookDb");
 const Book = require("../models/bookModel");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
@@ -59,9 +65,20 @@ const updateBookHandler = async (req, res) => {
   }
 };
 
+const deleteBookHandler = async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    const result = await deleteBook({ _id: id });
+    successsTemplate(res, result, messages.book_deleted, 200);
+  } catch (error) {
+    errorTemplate(res, error, error.message || messages.book_not_deleted);
+  }
+};
+
 module.exports = {
   getAllBooksHandler,
   getBookByIdHandler,
   postBookHandler,
   updateBookHandler,
+  deleteBookHandler,
 };

@@ -13,7 +13,11 @@ const saveBook = async (newBook) => {
 };
 
 const updateBook = async (filter, update) => {
-  return await Book.updateOne(filter, update);
+  return await Book.updateOne(filter, update).exec();
+};
+
+const deleteBook = async (obj) => {
+  return await Book.deleteOne(obj).exec();
 };
 
 module.exports = {
@@ -21,4 +25,5 @@ module.exports = {
   findBook,
   saveBook,
   updateBook,
+  deleteBook,
 };

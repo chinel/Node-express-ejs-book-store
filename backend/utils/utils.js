@@ -9,6 +9,8 @@ const messages = {
   book_updated: "Book updated.",
   book_deleted: "Book deleted.",
   book_not_deleted: "Book not deleted.",
+  author_exists: "Author already exists.",
+  author_saved: "Author Saved.",
 };
 
 module.exports = { messages };

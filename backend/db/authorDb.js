@@ -8,7 +8,7 @@ const findAuthors = async (obj, selectValues) => {
   return await Author.find(obj).populate("book").select(selectValues).exec();
 };
 
-const findAuthorById = async (obj, selectValues) => {
+const findAuthor = async (obj, selectValues) => {
   return await Author.findOne(obj).populate("book").select(selectValues).exec();
 };
 
@@ -23,7 +23,7 @@ const deleteAuthor = async (obj) => {
 module.exports = {
   saveAuthor,
   findAuthors,
-  findAuthorById,
+  findAuthor,
   updateAuthor,
   deleteAuthor,
 };

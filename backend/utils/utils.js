@@ -11,6 +11,9 @@ const messages = {
   book_not_deleted: "Book not deleted.",
   author_exists: "Author already exists.",
   author_saved: "Author Saved.",
+  author_found: "Successful author.",
+  author_not_found: "Author not found.",
+  authors_found: "Successful authors",
 };
 
 module.exports = { messages };

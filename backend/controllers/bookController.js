@@ -16,7 +16,7 @@ const getAllBooksHandler = async (req, res) => {
     const books = await findBooks({}, "-__v");
     successsTemplate(res, books, messages.books_found, 200);
   } catch (error) {
-    errorTemplate(res, error, error.message);
+    errorTemplate(res, error, messages.books_not_found);
   }
 };
 
@@ -29,7 +29,7 @@ const getBookByIdHandler = async (req, res) => {
       successsTemplate(res, book, messages.book_found, 200);
     }
   } catch (error) {
-    errorTemplate(res, error, error.message);
+    errorTemplate(res, error, messages.book_error);
   }
 };
 
@@ -50,7 +50,7 @@ const postBookHandler = async (req, res) => {
       successsTemplate(res, result, messages.book_saved, 201);
     }
   } catch (error) {
-    errorTemplate(res, error, error.message || messages.book_not_saved);
+    errorTemplate(res, error, messages.book_not_saved);
   }
 };
 
@@ -61,7 +61,7 @@ const updateBookHandler = async (req, res) => {
     const result = await updateBook({ _id: id }, data);
     successsTemplate(res, result, messages.book_updated, 200);
   } catch (error) {
-    errorTemplate(res, error, error.message || messages.book_not_updated);
+    errorTemplate(res, error, messages.book_not_updated);
   }
 };
 
@@ -71,7 +71,7 @@ const deleteBookHandler = async (req, res) => {
     const result = await deleteBook({ _id: id });
     successsTemplate(res, result, messages.book_deleted, 200);
   } catch (error) {
-    errorTemplate(res, error, error.message || messages.book_not_deleted);
+    errorTemplate(res, error, messages.book_not_deleted);
   }
 };
 

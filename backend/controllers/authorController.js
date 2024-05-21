@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Author = require("../models/authorModel");
 const errorTemplate = require("../templates/errorTemplate");
-const { findAuthor, saveAuthor, findAuthors } = require("../db/authorDb");
+const {
+  findAuthor,
+  saveAuthor,
+  findAuthors,
+  updateAuthor,
+  deleteAuthor,
+} = require("../db/authorDb");
 const { messages } = require("../utils/utils");
 const successsTemplate = require("../templates/successTemplate");
 const { findBook } = require("../db/bookDb");
@@ -29,7 +35,7 @@ const postAuthorHandler = async (req, res) => {
     const result = await saveAuthor(savedAuthor);
     successsTemplate(res, result, messages.author_saved, 201);
   } catch (error) {
-    errorTemplate(res, error, error.message);
+    errorTemplate(res, error, messages.author_not_saved);
   }
 };
 
@@ -42,7 +48,7 @@ const getAuthorHandler = async (req, res) => {
       successsTemplate(res, author, messages.author_found, 200);
     }
   } catch (error) {
-    errorTemplate(res, error, error.message);
+    errorTemplate(res, error, messages.author_error);
   }
 };
 
@@ -51,8 +57,32 @@ const getAuthorsHandler = async (req, res) => {
     const authors = await findAuthors({}, "-__v");
     successsTemplate(res, authors, messages.authors_found, 200);
   } catch (error) {
-    errorTemplate(res, error, error.message);
+    errorTemplate(res, error, messages.authors_not_found);
   }
 };
 
-module.exports = { postAuthorHandler, getAuthorHandler, getAuthorsHandler };
+const updateAuthorHandler = async (req, res) => {
+  try {
+    const result = await updateAuthor({ _id: req.params.authorId }, req.body);
+    successsTemplate(res, result, messages.author_updated, 200);
+  } catch (error) {
+    errorTemplate(res, error, messages.author_not_updated);
+  }
+};
+
+const deleteAuthorHandler = async (req, res) => {
+  try {
+    const result = await deleteAuthor({ _id: req.params.authorId });
+    successsTemplate(res, result, messages.author_deleted, 200);
+  } catch (error) {
+    errorTemplate(res, error, messages.author_not_deleted);
+  }
+};
+
+module.exports = {
+  postAuthorHandler,
+  getAuthorHandler,
+  getAuthorsHandler,
+  updateAuthorHandler,
+  deleteAuthorHandler,
+};

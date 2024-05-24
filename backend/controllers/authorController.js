@@ -35,7 +35,7 @@ const postAuthorHandler = async (req, res) => {
     const result = await saveAuthor(savedAuthor);
     successsTemplate(res, result, messages.author_saved, 201);
   } catch (error) {
-    errorTemplate(res, error, messages.author_not_saved);
+    errorTemplate(res, error, error.message);
   }
 };
 

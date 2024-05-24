@@ -7,6 +7,7 @@ const userRouter = require("../routers/userRouter");
 const bookRouter = require("../routers/bookRouter");
 const authorRouter = require("../routers/authorRouter");
 const { connect } = require("../db/db");
+const auth = require("../middleware/authorization");
 
 const NODE_ENV = process.env.NODE_ENV;
 const app = express();
@@ -40,8 +41,8 @@ app.use("/health-check", (req, res) => {
 
 //routers
 app.use("/users", userRouter);
-app.use("/books", bookRouter);
-app.use("/authors", authorRouter);
+app.use("/books", [auth, bookRouter]);
+app.use("/authors", [auth, authorRouter]);
 
 //Middleware to handle bad url or error
 app.use((req, res, next) => {

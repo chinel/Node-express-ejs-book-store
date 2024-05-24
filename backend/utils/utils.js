@@ -23,6 +23,7 @@ const messages = {
   author_deleted: "Author deleted.",
   author_not_updated: "Unable to update author.",
   author_not_deleted: "Unable to delete author",
+  auth_failed: "Authentication Failed",
 };
 
 module.exports = { messages };

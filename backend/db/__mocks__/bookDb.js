@@ -40,4 +40,21 @@ const findBook = (obj, selectValues) => {
   });
 };
 
-module.exports = { saveBook, findBooks, findBook };
+const updateBook = (obj, selectValues) => {
+  return Promise.resolve({
+    acknowledged: true,
+    modifiedCount: 1,
+    upsertedId: null,
+    upsertedCount: 0,
+    matchedCount: 1,
+  });
+};
+
+const deleteBook = (obj, selectValues) => {
+  return Promise.resolve({
+    acknowledged: true,
+    deletedCount: 1,
+  });
+};
+
+module.exports = { saveBook, findBooks, findBook, updateBook, deleteBook };

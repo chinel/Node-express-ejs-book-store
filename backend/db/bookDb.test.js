@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 const Book = require("../models/bookModel");
 const { generateGUID } = require("../utils/utils");
-const { saveBook, findBooks, findBook } = require("./bookDb");
+const {
+  saveBook,
+  findBooks,
+  findBook,
+  updateBook,
+  deleteBook,
+} = require("./bookDb");
+
 jest.mock("./bookDb");
 
 describe("Book Test Suite", () => {
@@ -49,6 +56,19 @@ describe("Book Test Suite", () => {
     expect(result.price).toEqual(book.price);
     expect(result.yearPublished).toEqual(book.yearPublished);
   });
-  test("Update book", () => {});
-  test("Delete book", () => {});
+
+  test("Update book", async () => {
+    const result = await updateBook();
+    expect(result.acknowledged).toBe(true);
+    expect(result.modifiedCount).toEqual(1);
+    expect(result.upsertedId).toBe(null);
+    expect(result.upsertedCount).toEqual(0);
+    expect(result.matchedCount).toEqual(1);
+  });
+
+  test("Delete book", async () => {
+    const result = await deleteBook({ _id: new mongoose.Types.ObjectId() });
+    expect(result.acknowledged).toBe(true);
+    expect(result.deletedCount).toEqual(1);
+  });
 });

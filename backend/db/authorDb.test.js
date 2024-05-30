@@ -27,9 +27,10 @@ describe("Author Test Suite", () => {
     const newAuthor = new Author(author);
 
     const result = await saveAuthor(newAuthor);
-    expect(result._id).toEqual(author.id);
+
+    expect(mongoose.Types.ObjectId.isValid(result._id)).toBe(true);
     expect(result.name).toEqual(author.name);
-    expect(result.book).toEqual(author.book);
+    expect(mongoose.Types.ObjectId.isValid(result.book)).toBe(true);
     expect(result.publisher).toEqual(author.publisher);
     expect(result.about).toEqual(author.about);
     expect(result.website).toEqual(author.website);

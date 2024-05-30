@@ -6,4 +6,4 @@ const saveAuthor = (obj) => {
   });
 };
 
-module.exports = saveAuthor;
+module.exports = { saveAuthor };

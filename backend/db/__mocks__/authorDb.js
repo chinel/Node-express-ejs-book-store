@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { generateGUID } = require("../../utils/utils");
 
 const saveAuthor = (obj) => {
   return Promise.resolve({
@@ -6,4 +7,27 @@ const saveAuthor = (obj) => {
   });
 };
 
-module.exports = { saveAuthor };
+const findAuthors = (obj, selectedValues) => {
+  const guid = generateGUID();
+
+  return Promise.resolve([
+    {
+      _id: new mongoose.Types.ObjectId(),
+      name: `James doe ${guid}`,
+      book: "6650c393bbcb5015689c4edd",
+      publisher: "Pearson Publisher",
+      about: "A highly sophisticated author, New york's best seller.",
+      website: "https://google.com",
+    },
+    {
+      _id: new mongoose.Types.ObjectId(),
+      name: `James doe ${guid}`,
+      book: "6650c393bbcb5015689c4edd",
+      publisher: "Pearson Publisher",
+      about: "A highly sophisticated author, New york's best seller.",
+      website: "https://google.com",
+    },
+  ]);
+};
+
+module.exports = { saveAuthor, findAuthors };

@@ -11,7 +11,18 @@ const { generateGUID } = require("../utils/utils");
 jest.mock("./authorDb");
 
 describe("Author Test Suite", () => {
-  test("Find all authors", () => {});
+  test("Find all authors", async () => {
+    const authors = await findAuthors({});
+
+    expect(mongoose.Types.ObjectId.isValid(authors[0]._id)).toBe(true);
+    expect(authors[0].name).toContain(`James doe`);
+    expect(mongoose.Types.ObjectId.isValid(authors[0].book)).toBe(true);
+    expect(authors[0].publisher).toEqual("Pearson Publisher");
+    expect(authors[0].about).toEqual(
+      "A highly sophisticated author, New york's best seller."
+    );
+    expect(authors[0].website).toEqual("https://google.com");
+  });
   test("Find a specific author", () => {});
   test("Create new author", async () => {
     const guid = generateGUID();

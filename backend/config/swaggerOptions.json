@@ -138,6 +138,89 @@
           }
         }
       }
+    },
+    "/books": {
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Save a new book",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "default": "How to run a cusine"
+                  },
+                  "author": {
+                    "type": "string",
+                    "default": "Mandy Patter"
+                  },
+                  "ISBN": {
+                    "type": "string",
+                    "default": "10-999922-29304"
+                  },
+                  "numberOfPages": {
+                    "type": "string",
+                    "default": "200"
+                  },
+                  "price": {
+                    "type": "number",
+                    "default": 200
+                  },
+                  "yearPublished": {
+                    "type": "string",
+                    "default": "2024"
+                  }
+             
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Get all books",
+       
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+         
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      }
     }
   }
 }

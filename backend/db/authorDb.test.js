@@ -23,7 +23,17 @@ describe("Author Test Suite", () => {
     );
     expect(authors[0].website).toEqual("https://google.com");
   });
-  test("Find a specific author", () => {});
+  test("Find a specific author", async () => {
+    const author = await findAuthor({ _id: new mongoose.Types.ObjectId() });
+    expect(mongoose.Types.ObjectId.isValid(author._id)).toBe(true);
+    expect(author.name).toContain("James doe");
+    expect(mongoose.Types.ObjectId.isValid(author.book)).toBe(true);
+    expect(author.publisher).toEqual("Pearson Publisher");
+    expect(author.about).toEqual(
+      "A highly sophisticated author, New york's best seller."
+    );
+    expect(author.website).toEqual("https://google.com");
+  });
   test("Create new author", async () => {
     const guid = generateGUID();
 

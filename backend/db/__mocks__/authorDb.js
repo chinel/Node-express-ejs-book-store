@@ -43,4 +43,14 @@ const findAuthor = (obj, selectedValues) => {
   });
 };
 
-module.exports = { saveAuthor, findAuthors, findAuthor };
+const updateAuthor = (filter, update) => {
+  return Promise.resolve({
+    acknowledged: true,
+    modifiedCount: 1,
+    upsertedId: null,
+    upsertedCount: 0,
+    matchedCount: 1,
+  });
+};
+
+module.exports = { saveAuthor, findAuthors, findAuthor, updateAuthor };

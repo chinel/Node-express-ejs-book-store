@@ -56,6 +56,16 @@ describe("Author Test Suite", () => {
     expect(result.about).toEqual(author.about);
     expect(result.website).toEqual(author.website);
   });
-  test("Update author", () => {});
+  test("Update author", async () => {
+    const result = await updateAuthor(
+      { _id: new mongoose.Types.ObjectId() },
+      { name: "Ann Doe" }
+    );
+    expect(result.acknowledged).toBe(true);
+    expect(result.modifiedCount).toEqual(1);
+    expect(result.upsertedId).toEqual(null);
+    expect(result.upsertedCount).toEqual(0);
+    expect(result.matchedCount).toEqual(1);
+  });
   test("Delete Author", () => {});
 });

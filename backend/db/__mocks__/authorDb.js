@@ -53,4 +53,17 @@ const updateAuthor = (filter, update) => {
   });
 };
 
-module.exports = { saveAuthor, findAuthors, findAuthor, updateAuthor };
+const deleteAuthor = (filter) => {
+  return Promise.resolve({
+    acknowledged: true,
+    deletedCount: 1,
+  });
+};
+
+module.exports = {
+  saveAuthor,
+  findAuthors,
+  findAuthor,
+  updateAuthor,
+  deleteAuthor,
+};

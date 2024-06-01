@@ -67,5 +67,9 @@ describe("Author Test Suite", () => {
     expect(result.upsertedCount).toEqual(0);
     expect(result.matchedCount).toEqual(1);
   });
-  test("Delete Author", () => {});
+  test("Delete Author", async () => {
+    const result = await deleteAuthor({ _id: new mongoose.Types.ObjectId() });
+    expect(result.acknowledged).toBe(true);
+    expect(result.deletedCount).toEqual(1);
+  });
 });

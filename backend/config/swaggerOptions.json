@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Node js Online Store API",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Nelo Kwaz",
+      "email": "nelokwaz@gmail.com",
+      "url": "https://github.com/chinel"
+    }
+  },
+  "servers": [
+    {
+      "description": "Local Server",
+      "url": "http://localhost:3001"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "bearerFormat": "JWT",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Register User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "default": "Nel"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "default": "Kal"
+                  },
+                  "email": {
+                    "type": "string",
+                    "default": "sample@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "123456"
+                  },
+                  "address": {
+                    "type": "string",
+                    "default": "123 Main street"
+                  },
+                  "state": {
+                    "type": "string",
+                    "default": "Lagos"
+                  },
+                  "city": {
+                    "type": "array",
+                    "default": "Surulere"
+                  },
+                  "zipCode": {
+                    "type": "string",
+                    "default": "100001"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Login User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "default": "sample@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      }
+    }
+  }
+}

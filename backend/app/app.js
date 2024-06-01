@@ -8,7 +8,8 @@ const bookRouter = require("../routers/bookRouter");
 const authorRouter = require("../routers/authorRouter");
 const { connect } = require("../db/db");
 const auth = require("../middleware/authorization");
-
+const swaggerui = require("swagger-ui-express");
+const document = require("../config/swaggerOptions.json");
 const NODE_ENV = process.env.NODE_ENV;
 const app = express();
 
@@ -43,6 +44,9 @@ app.use("/health-check", (req, res) => {
 app.use("/users", userRouter);
 app.use("/books", [auth, bookRouter]);
 app.use("/authors", [auth, authorRouter]);
+
+//use middleware for api-docs swagger
+app.use("/api-docs", swaggerui.serve, swaggerui.setup(document));
 
 //Middleware to handle bad url or error
 app.use((req, res, next) => {

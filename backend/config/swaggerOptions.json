@@ -175,7 +175,6 @@
                     "type": "string",
                     "default": "2024"
                   }
-             
                 }
               }
             }
@@ -204,12 +203,10 @@
           "Books"
         ],
         "description": "Get all books",
-       
         "responses": {
           "200": {
             "description": "Success"
           },
-         
           "404": {
             "description": "Not Found"
           },
@@ -222,17 +219,19 @@
         }
       }
     },
-    "/books/{bookId}":{
-      "get":{
-        "tags":["Books"],
-        "description":"Get a book by ID",
+    "/books/{bookId}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Get a book by ID",
         "parameters": [
           {
             "name": "bookId",
             "in": "path",
             "description": "The book id:",
             "required": true,
-            "schema":{
+            "schema": {
               "type": "string"
             }
           }
@@ -250,105 +249,305 @@
           "501": {
             "description": "Error"
           }
-      }
-      
-    },
-    "put":{
-      "tags":["Books"],
-      "description":"Update a book by ID",
-      "parameters": [
-        {
-          "name": "bookId",
-          "in": "path",
-          "description": "The book id:",
-          "required": true,
-          "schema":{
-            "type": "string"
-          }
         }
-      ],
-      "requestBody": {
-        "content": {
-          "application/json": {
+      },
+      "put": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Update a book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "The book id:",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "default": "How to run a cusine 101"
-                },
-                "author": {
-                  "type": "string",
-                  "default": "Mandy Pattery"
-                },
-                "ISBN": {
-                  "type": "string",
-                  "default": "10-999922-29307"
-                },
-                "numberOfPages": {
-                  "type": "string",
-                  "default": "100"
-                },
-                "price": {
-                  "type": "number",
-                  "default": 400
-                },
-                "yearPublished": {
-                  "type": "string",
-                  "default": "2023"
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "default": "How to run a cusine 101"
+                  },
+                  "author": {
+                    "type": "string",
+                    "default": "Mandy Pattery"
+                  },
+                  "ISBN": {
+                    "type": "string",
+                    "default": "10-999922-29307"
+                  },
+                  "numberOfPages": {
+                    "type": "string",
+                    "default": "100"
+                  },
+                  "price": {
+                    "type": "number",
+                    "default": 400
+                  },
+                  "yearPublished": {
+                    "type": "string",
+                    "default": "2023"
+                  }
                 }
-           
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
         }
       },
-      "responses": {
-        "200": {
-          "description": "Success"
-        },
-        "404": {
-          "description": "Not Found"
-        },
-        "500": {
-          "description": "Error"
-        },
-        "501": {
-          "description": "Error"
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Delete a book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "The book id:",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
         }
+      }
+    },
+    "/authors": {
+      "post": {
+        "tags": [
+          "Authors"
+        ],
+        "description": "Save a new author",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "default": "Jane patterson"
+                  },
+                  "book": {
+                    "type": "string",
+                    "default": "6653a1be1cc47ba0f9a98350"
+                  },
+                  "publisher": {
+                    "type": "string",
+                    "default": "Pearson Publisher"
+                  },
+                  "about": {
+                    "type": "string",
+                    "default": "A highly sophisticated author, New york's best seller."
+                  },
+                  "website": {
+                    "type": "string",
+                    "default": "https://google.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "description": "Get all authors",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/authors/{authorId}": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "description": "Get an author by ID",
+        "parameters": [
+          {
+            "name": "authorId",
+            "in": "path",
+            "description": "The author ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Authors"
+        ],
+        "description": "Update an author by ID",
+        "parameters": [
+          {
+            "name": "authorId",
+            "in": "path",
+            "description": "The author id:",
+            "required": true,
+            "schema":{"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "default": "Jane patterson new"
+                  },
+                  "book": {
+                    "type": "string",
+                    "default": "6653a1be1cc47ba0f9a98350"
+                  },
+                  "publisher": {
+                    "type": "string",
+                    "default": "Pearson Publisher 101"
+                  },
+                  "about": {
+                    "type": "string",
+                    "default": "A highly sophisticated author 101, New york's best seller."
+                  },
+                  "website": {
+                    "type": "string",
+                    "default": "https://mysite.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Authors"
+        ],
+        "description": "Delete an author by ID",
+        "parameters": [
+          {
+            "name": "authorId",
+            "in": "path",
+            "description": "The author ID:",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+        }
+      }
     }
-    
-  },
-  "delete":{
-    "tags":["Books"],
-    "description":"Delete a book by ID",
-    "parameters": [
-      {
-        "name": "bookId",
-        "in": "path",
-        "description": "The book id:",
-        "required": true,
-        "schema":{
-          "type": "string"
-        }
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Success"
-      },
-      "404": {
-        "description": "Not Found"
-      },
-      "500": {
-        "description": "Error"
-      },
-      "501": {
-        "description": "Error"
-      }
   }
-  
-}
-  }
-}
 }

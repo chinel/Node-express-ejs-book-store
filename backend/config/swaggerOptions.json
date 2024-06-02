@@ -221,6 +221,134 @@
           }
         }
       }
+    },
+    "/books/{bookId}":{
+      "get":{
+        "tags":["Books"],
+        "description":"Get a book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "The book id:",
+            "required": true,
+            "schema":{
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error"
+          },
+          "501": {
+            "description": "Error"
+          }
+      }
+      
+    },
+    "put":{
+      "tags":["Books"],
+      "description":"Update a book by ID",
+      "parameters": [
+        {
+          "name": "bookId",
+          "in": "path",
+          "description": "The book id:",
+          "required": true,
+          "schema":{
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "default": "How to run a cusine 101"
+                },
+                "author": {
+                  "type": "string",
+                  "default": "Mandy Pattery"
+                },
+                "ISBN": {
+                  "type": "string",
+                  "default": "10-999922-29307"
+                },
+                "numberOfPages": {
+                  "type": "string",
+                  "default": "100"
+                },
+                "price": {
+                  "type": "number",
+                  "default": 400
+                },
+                "yearPublished": {
+                  "type": "string",
+                  "default": "2023"
+                }
+           
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success"
+        },
+        "404": {
+          "description": "Not Found"
+        },
+        "500": {
+          "description": "Error"
+        },
+        "501": {
+          "description": "Error"
+        }
     }
+    
+  },
+  "delete":{
+    "tags":["Books"],
+    "description":"Delete a book by ID",
+    "parameters": [
+      {
+        "name": "bookId",
+        "in": "path",
+        "description": "The book id:",
+        "required": true,
+        "schema":{
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Success"
+      },
+      "404": {
+        "description": "Not Found"
+      },
+      "500": {
+        "description": "Error"
+      },
+      "501": {
+        "description": "Error"
+      }
   }
+  
+}
+  }
+}
 }

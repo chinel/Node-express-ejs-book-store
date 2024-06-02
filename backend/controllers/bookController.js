@@ -50,7 +50,7 @@ const postBookHandler = async (req, res) => {
       successsTemplate(res, result, messages.book_saved, 201);
     }
   } catch (error) {
-    errorTemplate(res, error, messages.book_not_saved);
+    errorTemplate(res, error, error.message || messages.book_not_saved);
   }
 };
 

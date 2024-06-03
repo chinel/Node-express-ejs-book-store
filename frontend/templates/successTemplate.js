@@ -1,8 +1,8 @@
-const successsTemplate = (res, page, pageTitle, message, body) => {
+const successsTemplate = (res, page, pageTitle, message, session) => {
   res.render(page, {
     pageTitle,
     message,
-    body,
+    session,
   });
 };
 module.exports = successsTemplate;

@@ -4,35 +4,77 @@ const {
 } = require("../validation/validation");
 const { isEmpty, messages } = require("../utilities/utils");
 const { registerUser, loginUser } = require("../services/userService");
+const successsTemplate = require("../templates/successTemplate");
+const errorTemplate = require("../templates/errorTemplate");
+
+const getHomeHandler = (req, res) => {
+  const session = req.session;
+  const { message } = session;
+  req.session.message = null;
+
+  successsTemplate(res, "home", "Home", message || undefined, session);
+};
+
+const getAboutHandler = (req, res) => {
+  const session = req.session;
+  successsTemplate(res, "about", "About", null, session);
+};
+
+const logoutHandler = (req, res) => {
+  req.session.destroy(null);
+  res.redirect("/");
+};
+
+const getLoginHandler = (req, res) => {
+  const session = req.session;
+  successsTemplate(res, "login", "Login", undefined, session);
+};
+
+const getRegisterHandler = (req, res) => {
+  const session = req.session;
+
+  successsTemplate(res, "register", "Register", undefined, session);
+};
 
 const postRegistrationHandler = (req, res) => {
+  const session = req.session;
+
   const errors = validateRegistration(req.body);
   if (isEmpty(errors)) {
     //call the backend
     registerUser(req.body)
       .then((result) => {
         console.log(result);
-        res.render("login", {
-          pagename: "Login",
-          message: messages.successful_registration,
-        });
+
+        successsTemplate(
+          res,
+          "login",
+          "Login",
+          messages.successful_registration,
+          session
+        );
       })
       .catch((err) => {
-        res.render("register", {
-          pagename: "Register",
-          body: req.body,
-          message: err.response
+        errorTemplate(
+          res,
+          "register",
+          "Register",
+          err,
+          err.response
             ? err.response.data.error.message
             : "Oops an error has occured",
-        });
+          req.body
+        );
       });
   } else {
-    res.render("register", {
-      pagename: "Register",
+    errorTemplate(
+      res,
+      "register",
+      "Register",
       errors,
-      body: req.body,
-      message: messages.failed_registration,
-    });
+      messages.failed_registration,
+      req.body
+    );
   }
 };
 
@@ -54,26 +96,36 @@ const postLoginHandler = (req, res) => {
         res.redirect("/");
       })
       .catch((err) => {
-        console.log(err.response);
-        res.render("login", {
-          pagename: "Login",
-          body: req.body,
-          message: err.response
+        console.log(err);
+        errorTemplate(
+          res,
+          "login",
+          "Login",
+          err,
+          err.response
             ? err.response.data.error.message
             : "Oops an error has occured",
-        });
+          req.body
+        );
       });
   } else {
-    res.render("login", {
-      pagename: "Login",
+    errorTemplate(
+      res,
+      "login",
+      "Login",
       errors,
-      body: req.body,
-      message: messages.failed_login,
-    });
+      messages.failed_login,
+      req.body
+    );
   }
 };
 
 module.exports = {
   postLoginHandler,
   postRegistrationHandler,
+  getHomeHandler,
+  getAboutHandler,
+  logoutHandler,
+  getLoginHandler,
+  getRegisterHandler,
 };

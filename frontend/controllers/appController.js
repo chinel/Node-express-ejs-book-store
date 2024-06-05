@@ -67,6 +67,8 @@ const postRegistrationHandler = (req, res) => {
         );
       });
   } else {
+    //if using try catch you can throw new Error("error message") and then the catch block will handle it
+    //no need to add error template here if you want to but better to use error template
     errorTemplate(
       res,
       "register",

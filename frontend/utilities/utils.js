@@ -7,6 +7,7 @@ const messages = {
   successful_login: "Login Successful",
   failed_login: "Login Failed",
   failed_registration: "Registration Failed",
+  get_books_failed: "Unable to get books.",
 };
 module.exports = {
   isEmpty,

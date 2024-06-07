@@ -17,6 +17,7 @@ const getHomeHandler = (req, res) => {
 
 const getAboutHandler = (req, res) => {
   const session = req.session;
+  console.log("session--->", session);
   successsTemplate(res, "about", "About", null, session);
 };
 
@@ -94,6 +95,7 @@ const postLoginHandler = (req, res) => {
         session.logged = result.data.loggedIn;
         session.token = result.data.token;
         session.message = result.data.message;
+        console.log(session);
 
         res.redirect("/");
       })

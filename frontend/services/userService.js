@@ -4,7 +4,7 @@ require("dotenv").config();
 const BACKEND_URL = process.env.BACKEND_API;
 
 const registerUser = async (user) => {
-  const result = await axios.post(BACKEND_URL + "/register", {
+  const result = await axios.post(BACKEND_URL + "/users/register", {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
@@ -19,7 +19,7 @@ const registerUser = async (user) => {
 };
 
 const loginUser = async (user) => {
-  const result = await axios.post(BACKEND_URL + "/login", {
+  const result = await axios.post(BACKEND_URL + "/users/login", {
     email: user.email,
     password: user.password,
   });

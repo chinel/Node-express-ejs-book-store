@@ -4,9 +4,9 @@ require("dotenv").config();
 const BACKEND_URL = process.env.BACKEND_API;
 
 const getAllBooks = async (req) => {
-  console.log("request-->", req.headers.authorization);
-  axios.default.headers.get["Authorization"] = req.headers.authorization;
-  return await axios.get(BACKEND_URL + "/books");
+  axios.defaults.headers.get["Authorization"] = req.headers.authorization;
+  const result = await axios.get(BACKEND_URL + "/books");
+  return result;
 };
 
 module.exports = { getAllBooks };

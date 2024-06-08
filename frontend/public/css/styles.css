@@ -11493,8 +11493,14 @@ body {
 }
 
 .projects-section {
-  padding: 10rem 0;
+  padding: 5rem 0;
 }
+
+.projects-section .project{
+  min-height: 300px;
+}
+
+
 .projects-section .featured-text {
   padding: 2rem;
 }
@@ -11510,7 +11516,7 @@ body {
 }
 @media (min-width: 992px) {
   .projects-section .project-text {
-    padding: 5rem;
+    padding: 3rem;
   }
 }
 

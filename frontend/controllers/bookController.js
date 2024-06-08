@@ -13,6 +13,7 @@ const getBooksHandler = async (req, res) => {
       books: books.data.result,
     });
   } catch (errors) {
+    console.log("errors-->", errors);
     errorTemplate(
       res,
       "books",

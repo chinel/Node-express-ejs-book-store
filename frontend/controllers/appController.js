@@ -17,7 +17,6 @@ const getHomeHandler = (req, res) => {
 
 const getAboutHandler = (req, res) => {
   const session = req.session;
-  console.log("session--->", session);
   successsTemplate(res, "about", "About", null, session);
 };
 
@@ -45,8 +44,6 @@ const postRegistrationHandler = (req, res) => {
     //call the backend
     registerUser(req.body)
       .then((result) => {
-        console.log(result);
-
         successsTemplate(
           res,
           "login",
@@ -90,12 +87,10 @@ const postLoginHandler = (req, res) => {
     //call the backend
     loginUser(req.body)
       .then((result) => {
-        console.log(result);
         session.name = result.data.user.firstName;
         session.logged = result.data.loggedIn;
         session.token = result.data.token;
         session.message = result.data.message;
-        console.log(session);
 
         res.redirect("/");
       })

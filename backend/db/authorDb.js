@@ -5,11 +5,11 @@ const saveAuthor = async (newAuthor) => {
 };
 
 const findAuthors = async (obj, selectValues) => {
-  return await Author.find(obj).populate("book").select(selectValues).exec();
+  return await Author.find(obj).select(selectValues).exec();
 };
 
 const findAuthor = async (obj, selectValues) => {
-  return await Author.findOne(obj).populate("book").select(selectValues).exec();
+  return await Author.findOne(obj).select(selectValues).exec();
 };
 
 const updateAuthor = async (filter, update) => {

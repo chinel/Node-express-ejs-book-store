@@ -1,11 +1,15 @@
 const Book = require("../models/bookModel");
 
 const findBooks = async (obj, selectValues) => {
-  return await Book.find(obj).select(selectValues).exec();
+  return await Book.find(obj)
+    .select(selectValues)
+    .populate("author")
+    .select(selectValues)
+    .exec();
 };
 
 const findBook = async (obj, selectValues) => {
-  return await Book.findOne(obj).select(selectValues).exec();
+  return await Book.findOne(obj).populate("author").select(selectValues).exec();
 };
 
 const saveBook = async (newBook) => {

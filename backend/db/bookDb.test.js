@@ -16,7 +16,8 @@ describe("Book Test Suite", () => {
     const books = await findBooks({});
     expect(mongoose.Types.ObjectId.isValid(books[0]._id)).toBe(true);
     expect(books[0].title).toContain(`How to run a business`);
-    expect(books[0].author).toEqual("Mandy Patter");
+    expect(mongoose.Types.ObjectId.isValid(books[0].author)).toBe(true);
+
     expect(books[0].ISBN).toEqual("10-999922-29304");
     expect(books[0].numberOfPages).toEqual("200");
     expect(books[0].price).toEqual(200);
@@ -27,7 +28,7 @@ describe("Book Test Suite", () => {
     const book = await findBook({ _id: new mongoose.Types.ObjectId() });
     expect(mongoose.Types.ObjectId.isValid(book._id)).toBe(true);
     expect(book.title).toContain(`How to run a business`);
-    expect(book.author).toEqual("Mandy Patter");
+    expect(mongoose.Types.ObjectId.isValid(book.author)).toBe(true);
     expect(book.ISBN).toEqual("10-999922-29304");
     expect(book.numberOfPages).toEqual("200");
     expect(book.price).toEqual(200);
@@ -39,7 +40,7 @@ describe("Book Test Suite", () => {
     const book = {
       _id: new mongoose.Types.ObjectId(),
       title: `How to run a business ${guid}`,
-      author: "Mandy Patter",
+      author: "66644b4f816d507fe43aa433",
       ISBN: "10-999922-29304",
       numberOfPages: "200",
       price: 200,
@@ -50,7 +51,7 @@ describe("Book Test Suite", () => {
     const result = await saveBook(newBook);
     expect(result._id).toEqual(book._id);
     expect(result.title).toEqual(`How to run a business ${guid}`);
-    expect(result.author).toEqual(book.author);
+    expect(mongoose.Types.ObjectId.isValid(result.author)).toBe(true);
     expect(result.ISBN).toEqual(book.ISBN);
     expect(result.numberOfPages).toEqual(book.numberOfPages);
     expect(result.price).toEqual(book.price);

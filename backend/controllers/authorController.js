@@ -16,18 +16,15 @@ const postAuthorHandler = async (req, res) => {
   try {
     const author = new Author();
     const newAuthor = Object.assign(author, req.body);
-    const getAuthor = await findAuthor(
-      { name: req.body.name, book: req.body.book },
-      "-__v"
-    );
-    const getBook = await findBook({ _id: req.body.book }, "-__v");
+    const getAuthor = await findAuthor({ name: req.body.name }, "-__v");
+    // const getBook = await findBook({ _id: req.body.book }, "-__v");
     if (getAuthor) {
       throw new Error(messages.author_exists);
     }
 
-    if (!getBook) {
-      throw new Error(messages.book_not_found);
-    }
+    // if (!getBook) {
+    //   throw new Error(messages.book_not_found);
+    // }
 
     const savedAuthor = Object.assign(newAuthor, {
       _id: new mongoose.Types.ObjectId(),

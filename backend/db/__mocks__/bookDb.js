@@ -11,7 +11,7 @@ const findBooks = (obj, selectValues) => {
     {
       _id: new mongoose.Types.ObjectId(),
       title: `How to run a business ${generateGUID()}`,
-      author: "Mandy Patter",
+      author: "66644b4f816d507fe43aa433",
       ISBN: "10-999922-29304",
       numberOfPages: "200",
       price: 200,
@@ -20,7 +20,7 @@ const findBooks = (obj, selectValues) => {
     {
       _id: new mongoose.Types.ObjectId(),
       title: `How to run a business ${generateGUID()}`,
-      author: "Mandy Patter",
+      author: "66644b4f816d507fe43aa433",
       ISBN: "10-999922-29304",
       numberOfPages: "200",
       price: 200,
@@ -32,7 +32,7 @@ const findBook = (obj, selectValues) => {
   return Promise.resolve({
     _id: new mongoose.Types.ObjectId(),
     title: `How to run a business ${generateGUID()}`,
-    author: "Mandy Patter",
+    author: "66644b4f816d507fe43aa433",
     ISBN: "10-999922-29304",
     numberOfPages: "200",
     price: 200,

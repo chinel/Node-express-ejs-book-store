@@ -13,7 +13,7 @@ const getBooksHandler = async (req, res) => {
       books: books.data.result,
     });
   } catch (errors) {
-    console.log("errors-->", errors);
+    console.log("errors-->", errors.response.data);
     errorTemplate(
       res,
       "books",
@@ -25,4 +25,9 @@ const getBooksHandler = async (req, res) => {
   }
 };
 
-module.exports = { getBooksHandler };
+const getAddBookHandler = (req, res) => {
+  const session = req.session;
+  successsTemplate(res, "add-book", "Add a book", null, session);
+};
+
+module.exports = { getBooksHandler, getAddBookHandler };

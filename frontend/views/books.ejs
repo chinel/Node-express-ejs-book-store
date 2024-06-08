@@ -42,10 +42,15 @@
   <!-- Projects-->
   <section class="projects-section bg-light" id="projects">
     <div class="container px-4 px-lg-5">
-
+      <% if (typeof(data) !== "undefined") { %>
+      <div class="row mb-lg-5 d-flex justify-content-end">
+        <div class="col-auto"> <a href="/books/addbook" class="btn btn-primary ">
+          + Add a Book
+        </a></div>
+      </div>
 
       <div class="row gx-4 gy-4 ">
-      <% if (typeof(data) !== "undefined") { %>
+  
             <% data.books.map((item, index) => { %>
               <div class="col-lg-6 order-lg-first">
                 <div class="bg-black h-100 project">
@@ -65,9 +70,9 @@
                 </div>
               </div>
             <% }) %>
-      <% } %>
-
+  
       </div>
+      <% } %>
     </div>
   </section>
   <!-- Signup-->

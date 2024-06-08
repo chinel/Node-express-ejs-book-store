@@ -10,6 +10,7 @@ const Book = require("../models/bookModel");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
 const { messages } = require("../utils/utils");
+const { findAuthor } = require("../db/authorDb");
 
 const getAllBooksHandler = async (req, res) => {
   try {
@@ -37,7 +38,26 @@ const postBookHandler = async (req, res) => {
   try {
     const book = new Book();
     const newBook = Object.assign(book, req.body);
-    const getBook = await findBook(newBook, "-__v");
+    const isValidAuthor = mongoose.Types.ObjectId.isValid(req.body.author);
+    if (!isValidAuthor) {
+      throw new Error(messages.author_not_found);
+    }
+    const getBook = await findBook(
+      { title: req.body.title, author: req.body.author },
+      "-__v"
+    );
+
+    const getAuthor = await findAuthor(
+      {
+        _id: req.body.author,
+      },
+      "-__v"
+    );
+
+    if (!getAuthor) {
+      throw new Error(messages.author_not_found);
+    }
+
     if (getBook) {
       throw new Error(messages.book_exists);
     } else {

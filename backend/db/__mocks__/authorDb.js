@@ -14,7 +14,7 @@ const findAuthors = (obj, selectedValues) => {
     {
       _id: new mongoose.Types.ObjectId(),
       name: `James doe ${guid}`,
-      book: "6650c393bbcb5015689c4edd",
+
       publisher: "Pearson Publisher",
       about: "A highly sophisticated author, New york's best seller.",
       website: "https://google.com",
@@ -22,7 +22,6 @@ const findAuthors = (obj, selectedValues) => {
     {
       _id: new mongoose.Types.ObjectId(),
       name: `James doe ${guid}`,
-      book: "6650c393bbcb5015689c4edd",
       publisher: "Pearson Publisher",
       about: "A highly sophisticated author, New york's best seller.",
       website: "https://google.com",
@@ -36,7 +35,6 @@ const findAuthor = (obj, selectedValues) => {
   return Promise.resolve({
     _id: new mongoose.Types.ObjectId(),
     name: `James doe ${guid}`,
-    book: "6650c393bbcb5015689c4edd",
     publisher: "Pearson Publisher",
     about: "A highly sophisticated author, New york's best seller.",
     website: "https://google.com",

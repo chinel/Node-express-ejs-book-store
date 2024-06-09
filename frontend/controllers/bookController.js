@@ -34,9 +34,11 @@ const getAddBookHandler = async (req, res) => {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
     const authors = await getAllAuthors(req);
+    const authorsData = authors.data.result;
+    session.authors = authorsData;
 
     successsTemplate(res, "add-book", "Add a book", null, session, {
-      authors: authors.data.result,
+      authors: authorsData,
     });
   } catch (errors) {
     errorTemplate(
@@ -54,7 +56,9 @@ const addBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = await getAllAuthors(req);
+    const authors = session.authors
+      ? session.authors
+      : await getAllAuthors(req);
     const result = await addBook(req);
     successsTemplate(
       res,
@@ -84,7 +88,9 @@ const getEditBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = await getAllAuthors(req);
+    const authors = session.authors
+      ? session.authors
+      : await getAllAuthors(req);
     const book = await getBook(req);
 
     successsTemplate(res, "edit-book", "Edit book", null, session, {
@@ -108,7 +114,9 @@ const editBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = await getAllAuthors(req);
+    const authors = session.authors
+      ? session.authors
+      : await getAllAuthors(req);
     const result = await editBook(req);
     const book = await getBook(req);
 

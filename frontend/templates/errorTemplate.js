@@ -7,12 +7,13 @@ const errorTemplate = (res, page, pageTitle, errors, message, body) => {
     errResponse.data &&
     errResponse.data.error.message === "Authentication Failed"
   ) {
-    res.render("login", {
-      pageTitle: "Login",
-      errors,
-      message: messages.failed_login,
-      body: "undefined",
-    });
+    res.redirect("/login");
+    // res.render("login", {
+    //   pageTitle: "Login",
+    //   errors,
+    //   message: messages.failed_login,
+    //   body: "undefined",
+    // });
   } else {
     res.render(page, {
       pageTitle,

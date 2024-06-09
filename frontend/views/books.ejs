@@ -56,9 +56,12 @@
                 <div class="bg-black h-100 project">
                   <div class="d-flex">
                     <div class="project-text w-100 my-auto  text-lg-right">
-                      <h4 class="text-white"><%- item.title %></h4>
+                   <div class="d-flex justify-content-between gap-x-2">  
+                    <h4 class="text-white"><%- item.title %></h4>
+                   <a href="/books/<%- item._id %>"> <i class="fa fa-edit fa-2x mb-2"></i></a>
+                   </div>
                      <div class="row gy-2 mt-lg-3">
-                      <p class="mb-0 text-white-50">By - <%- item.author %></p>
+                      <p class="mb-0 text-white-50">By - <%- item.author.name %></p>
                       <p class="mb-0 text-white-50">ISBN - <%- item.ISBN %></p>
                       <p class="mb-0 text-white-50">Price - $<%- item.price %></p>
                       <p class="mb-0 text-white-50">Publised - <%- item.yearPublished %></p>

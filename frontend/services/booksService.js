@@ -3,16 +3,26 @@ require("dotenv").config();
 
 const BACKEND_URL = process.env.BACKEND_API;
 
+const headers = (req, methodValue) => {
+  //You can use the approach if you want specific request methods
+  // const method = methodValue || req.method.toLowerCase();
+  // const validMethods = ["get", "post", "put", "delete", "patch"];
+
+  // if (validMethods.includes(method)) {
+  // axios.defaults.headers[method]["Authorization"] = req.headers.authorization;
+  //}
+  axios.defaults.headers.common["Authorization"] = req.headers.authorization;
+};
+
 const getAllBooks = async (req) => {
-  axios.defaults.headers.get["Authorization"] = req.headers.authorization;
+  headers(req);
   const result = await axios.get(BACKEND_URL + "/books");
   return result;
 };
 
 const addBook = async (req) => {
   const book = req.body;
-  axios.defaults.headers.post["Authorization"] = req.headers.authorization;
-
+  headers(req);
   const result = await axios.post(BACKEND_URL + "/books", {
     title: book.title,
     author: book.author,
@@ -27,8 +37,7 @@ const addBook = async (req) => {
 
 const editBook = async (req) => {
   const book = req.body;
-  axios.defaults.headers.put["Authorization"] = req.headers.authorization;
-
+  headers(req, "put");
   const result = await axios.put(BACKEND_URL + "/books/" + req.params.bookId, {
     title: book.title,
     author: book.author,
@@ -42,7 +51,7 @@ const editBook = async (req) => {
 };
 
 const getBook = async (req) => {
-  axios.defaults.headers.get["Authorization"] = req.headers.authorization;
+  headers(req);
   const result = await axios.get(BACKEND_URL + "/books/" + req.params.bookId);
   return result;
 };

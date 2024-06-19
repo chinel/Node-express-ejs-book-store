@@ -56,4 +56,12 @@ const getBook = async (req) => {
   return result;
 };
 
-module.exports = { getAllBooks, addBook, getBook, editBook };
+const deleteBook = async (req) => {
+  headers(req);
+  const result = await axios.delete(
+    BACKEND_URL + "/books/" + req.params.bookId
+  );
+  return result;
+};
+
+module.exports = { getAllBooks, addBook, getBook, editBook, deleteBook };

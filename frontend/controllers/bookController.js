@@ -4,6 +4,7 @@ const {
   addBook,
   getBook,
   editBook,
+  deleteBook,
 } = require("../services/booksService");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
@@ -145,10 +146,24 @@ const editBookHandler = async (req, res) => {
   }
 };
 
+const deleteBookHandler = async (req, res) => {
+  try {
+    const session = req.session;
+    req.headers.authorization = "Bearer " + session.token;
+
+    const result = await deleteBook(req);
+
+    return res.json({ messages: messages.book_deleted, data: result });
+  } catch (err) {
+    return res.json({ error: true, messages: messages.book_delete_failed });
+  }
+};
+
 module.exports = {
   getBooksHandler,
   getAddBookHandler,
   addBookHandler,
   getEditBookHandler,
   editBookHandler,
+  deleteBookHandler,
 };

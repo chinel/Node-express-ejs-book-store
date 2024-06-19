@@ -5,6 +5,7 @@ const {
   addBookHandler,
   getEditBookHandler,
   editBookHandler,
+  deleteBookHandler,
 } = require("../controllers/bookController");
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.post("/addbook", addBookHandler);
 router.get("/addbook", getAddBookHandler);
 router.get("/:bookId", getEditBookHandler);
 router.post("/:bookId", editBookHandler);
+router.delete("/:bookId", deleteBookHandler);
 
 module.exports = router;

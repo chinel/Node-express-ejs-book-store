@@ -91,6 +91,7 @@ const deleteBookHandler = async (req, res) => {
     const result = await deleteBook({ _id: id });
     successsTemplate(res, result, messages.book_deleted, 200);
   } catch (error) {
+    console.log(error);
     errorTemplate(res, error, messages.book_not_deleted);
   }
 };

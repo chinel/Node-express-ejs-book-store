@@ -51,7 +51,7 @@ const validateRegistration = (body) => {
     !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password.trim())
   ) {
     errors.passwordMsg =
-      "Password must contain a letters and numbers 8 characters or more";
+      "Password must contain letters and numbers 8 characters or more";
   }
 
   if (confirmPassword.trim() !== password.trim()) {

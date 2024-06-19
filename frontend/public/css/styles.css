@@ -285,7 +285,16 @@ a {
   color: var(--bs-link-color);
   text-decoration: underline;
 }
-a:hover {
+
+.delete-btn {
+  color: var(--bs-link-color);
+  text-decoration: underline;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+a:hover, .delete-btn:hover {
   color: var(--bs-link-hover-color);
 }
 

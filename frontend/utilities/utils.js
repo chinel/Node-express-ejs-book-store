@@ -13,6 +13,8 @@ const messages = {
   get_book_failed: "Unable to get book.",
   book_updated: "Book updated successfully.",
   book_update_failed: "Book update failed.",
+  book_deleted: "Book Deleted",
+  book_delete_failed: "Unable to delete book",
 };
 module.exports = {
   isEmpty,

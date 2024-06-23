@@ -1,6 +1,6 @@
 const { loginUser, registerUser } = require("./userService");
-jest.mock("./userService.js"); // remove this line, if you do not want to use mock
-describe("Test Service calls backend", () => {
+jest.mock("./userService"); // remove this line, if you do not want to use mock
+describe("Test User Service calls backend", () => {
   const uuid = Math.random().toString(36).slice(2);
   const user = {
     firstName: "Nel",

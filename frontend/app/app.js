@@ -3,6 +3,7 @@ const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("../routes/userRouter");
 const bookRouter = require("../routes/bookRouter");
+const authorRouter = require("../routes/authorRouter");
 require("dotenv").config();
 
 const app = express();
@@ -34,4 +35,5 @@ app.use(express.static("views"));
 
 app.use("/", userRouter);
 app.use("/books", bookRouter);
+app.use("/authors", authorRouter);
 module.exports = app;

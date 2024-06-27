@@ -10,7 +10,7 @@ const {
 } = require("../db/authorDb");
 const { messages } = require("../utils/utils");
 const successsTemplate = require("../templates/successTemplate");
-const { findBook } = require("../db/bookDb");
+const { findBook, updateBookMany } = require("../db/bookDb");
 
 const postAuthorHandler = async (req, res) => {
   try {
@@ -70,6 +70,10 @@ const updateAuthorHandler = async (req, res) => {
 const deleteAuthorHandler = async (req, res) => {
   try {
     const result = await deleteAuthor({ _id: req.params.authorId });
+    await updateBookMany(
+      { author: req.params.authorId },
+      { $unset: { author: 1 } }
+    );
     successsTemplate(res, result, messages.author_deleted, 200);
   } catch (error) {
     errorTemplate(res, error, messages.author_not_deleted);

@@ -59,3 +59,20 @@ function handleDeleteBook(bookId) {
       });
   }
 }
+
+function handleDeleteAuthor(authorId) {
+  if (confirm("Are you sure you want to delete this author!")) {
+    console.log(`${DEV_FRONTED_API}/authors/${authorId}`);
+
+    fetch(`${DEV_FRONTED_API}/authors/${authorId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+}

@@ -61,7 +61,9 @@
                    <a href="/books/<%- item._id %>"> <i class="fa fa-edit fa-2x mb-2"></i></a>
                    </div>
                      <div class="row gy-2 mt-lg-3">
-                      <p class="mb-0 text-white-50">By - <%- item.author.name %></p>
+                      <p class="mb-0 text-white-50">By - <% if (item.author) { %>
+                        <%- item.author.name %>
+                      <% } else{ %>  Unknown  <%}%> </p>
                       <p class="mb-0 text-white-50">ISBN - <%- item.ISBN %></p>
                       <p class="mb-0 text-white-50">Price - $<%- item.price %></p>
                       <p class="mb-0 text-white-50">Publised - <%- item.yearPublished %></p>

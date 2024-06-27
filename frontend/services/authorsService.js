@@ -20,4 +20,11 @@ const getAllAuthors = async (req) => {
   return result;
 };
 
-module.exports = { getAllAuthors };
+const deleteAuthor = async (req) => {
+  headers(req, "delete");
+  const authorId = req.params.authorId;
+  const result = await axios.delete(BACKEND_URL + "/authors/" + authorId);
+  return result;
+};
+
+module.exports = { getAllAuthors, deleteAuthor };

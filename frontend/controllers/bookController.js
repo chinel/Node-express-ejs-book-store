@@ -57,9 +57,8 @@ const addBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = session.authors
-      ? session.authors
-      : await getAllAuthors(req);
+    const getAuthors = await getAllAuthors(req);
+    const authors = session.authors ? session.authors : getAuthors.data.result;
     const result = await addBook(req);
     successsTemplate(
       res,
@@ -68,7 +67,7 @@ const addBookHandler = async (req, res) => {
       messages.book_added,
       session,
       {
-        authors: authors.data.result,
+        authors: authors,
       }
     );
   } catch (err) {

@@ -10,6 +10,7 @@ const bookSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Author",
     required: true,
+    index: true,
   },
   ISBN: {
     type: String,

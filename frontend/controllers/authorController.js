@@ -23,11 +23,12 @@ const getAuthorsHandler = async (req, res) => {
   }
 };
 
-const deletAuthorHandler = (req, res) => {
+const deletAuthorHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const result = deleteAuthor(req);
+    const result = await deleteAuthor(req);
+
     return res.json({ messages: messages.author_deleted, data: result });
   } catch (error) {
     return res.json({ error: true, messages: messages.author_delete_failed });

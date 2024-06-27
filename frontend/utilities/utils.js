@@ -15,6 +15,8 @@ const messages = {
   book_update_failed: "Book update failed.",
   book_deleted: "Book Deleted",
   book_delete_failed: "Unable to delete book",
+  author_deleted: "Author Deleted",
+  author_delete_failed: "Unable to delete author",
 };
 module.exports = {
   isEmpty,

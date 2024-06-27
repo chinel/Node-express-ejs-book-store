@@ -1,4 +1,4 @@
-const { getAllAuthors } = require("../services/authorsService");
+const { getAllAuthors, deleteAuthor } = require("../services/authorsService");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
 const { messages } = require("../utilities/utils");
@@ -23,4 +23,15 @@ const getAuthorsHandler = async (req, res) => {
   }
 };
 
-module.exports = { getAuthorsHandler };
+const deletAuthorHandler = (req, res) => {
+  try {
+    const session = req.session;
+    req.headers.authorization = "Bearer " + session.token;
+    const result = deleteAuthor(req);
+    return res.json({ messages: messages.author_deleted, data: result });
+  } catch (error) {
+    return res.json({ error: true, messages: messages.author_delete_failed });
+  }
+};
+
+module.exports = { getAuthorsHandler, deletAuthorHandler };

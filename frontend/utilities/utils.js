@@ -18,6 +18,7 @@ const messages = {
   author_deleted: "Author Deleted",
   author_delete_failed: "Unable to delete author",
   get_author_failed: "Unable to get author.",
+  author_updated: "Author updated successfully.",
 };
 module.exports = {
   isEmpty,

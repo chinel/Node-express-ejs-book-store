@@ -1,12 +1,14 @@
 const express = require("express");
 const {
   getAuthorsHandler,
-  deletAuthorHandler,
+  deleteAuthorHandler,
+  getEditAuthorHandler,
 } = require("../controllers/authorController");
 
 const router = express.Router();
 
 router.get("/", getAuthorsHandler);
-router.delete("/:authorId", deletAuthorHandler);
+router.delete("/:authorId", deleteAuthorHandler);
+router.get("/:authorId", getEditAuthorHandler);
 
 module.exports = router;

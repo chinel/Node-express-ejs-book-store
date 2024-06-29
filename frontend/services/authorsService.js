@@ -20,6 +20,14 @@ const getAllAuthors = async (req) => {
   return result;
 };
 
+const getAuthor = async (req) => {
+  headers(req, "get");
+  const result = await axios.get(
+    BACKEND_URL + "/authors/" + req.params.authorId
+  );
+  return result;
+};
+
 const deleteAuthor = async (req) => {
   headers(req, "delete");
   const authorId = req.params.authorId;
@@ -27,4 +35,4 @@ const deleteAuthor = async (req) => {
   return result;
 };
 
-module.exports = { getAllAuthors, deleteAuthor };
+module.exports = { getAllAuthors, deleteAuthor, getAuthor };

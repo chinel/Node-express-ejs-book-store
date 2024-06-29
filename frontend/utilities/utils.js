@@ -8,15 +8,16 @@ const messages = {
   failed_login: "Login Failed",
   failed_registration: "Registration Failed",
   get_books_failed: "Unable to get books.",
-  get_authors_failed: "Unable to get authors.",
   book_added: "Book saved successfully",
   get_book_failed: "Unable to get book.",
   book_updated: "Book updated successfully.",
   book_update_failed: "Book update failed.",
   book_deleted: "Book Deleted",
   book_delete_failed: "Unable to delete book",
+  get_authors_failed: "Unable to get authors.",
   author_deleted: "Author Deleted",
   author_delete_failed: "Unable to delete author",
+  get_author_failed: "Unable to get author.",
 };
 module.exports = {
   isEmpty,

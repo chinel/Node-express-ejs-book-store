@@ -33,7 +33,7 @@
             <%= message %>
           </div>
           <% } %>
-          <h1 class="mx-auto my-0 text-uppercase">Edit Author</h1>
+          <h1 class="mx-auto my-0 text-uppercase">Add Author</h1>
         </div>
       </div>
     </div>
@@ -52,19 +52,19 @@
     
 
     </div>
-
   <div class="form-section"> 
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gy-4 ">
             <div class="col-md-10 col-lg-6 mx-auto text-center">
                 <i class="fa fa-book fa-2x mb-2"></i>
-                <h2 class="mb-5">Edit Author!</h2>
+                <h2 class="mb-5">Add Author!</h2>
                 <% if (message !== null ) { %>
                 <div <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
                   <%= message %></div>
                 <% } %>
-            <form class="form-signup"  action="/authors/<% if(typeof(data) !== "undefined" )
-            {%><%= data.body._id%> <%}%>" method="post">
+        
+
+            <form class="form-signup"  action="/authors/addauthor" method="post">
               <div class="row input-group-newsletter gap-4">
                 <div class="row">
                   <input required class="form-control" id="name" type="text" placeholder="Enter Author Name..." aria-label="Enter author name..." name="name" <% if(typeof(data) !== "undefined" )
@@ -92,7 +92,7 @@
              
                 <div class="row">
                   <button class="btn btn-primary" id="submitButton" type="submit">
-                    Update
+                    Submit
                   </button>
                 </div>
               </div>

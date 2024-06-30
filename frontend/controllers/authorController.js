@@ -90,9 +90,27 @@ const editAuthorHandler = async (req, res) => {
   }
 };
 
+const getAddAuthorHandler = (req, res) => {
+  try {
+    const session = req.session;
+    req.headers.authorization = "Bearer " + session.token;
+    successsTemplate(res, "add-author", "Add an Author", null, session);
+  } catch (errors) {
+    errorTemplate(
+      res,
+      "add-author",
+      "Add an Author",
+      errors,
+      messages.get_author_failed,
+      null
+    );
+  }
+};
+
 module.exports = {
   getAuthorsHandler,
   deleteAuthorHandler,
   getEditAuthorHandler,
   editAuthorHandler,
+  getAddAuthorHandler,
 };

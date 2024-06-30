@@ -1,11 +1,4 @@
-const successsTemplate = (
-  res,
-  page,
-  pageTitle,
-  message,
-  session,
-  data = null
-) => {
+const successsTemplate = (res, page, pageTitle, message, session, data) => {
   res.render(page, {
     pageTitle,
     message,

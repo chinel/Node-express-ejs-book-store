@@ -3,6 +3,7 @@ const {
   deleteAuthor,
   getAuthor,
   editAuthor,
+  postAuthor,
 } = require("../services/authorsService");
 const errorTemplate = require("../templates/errorTemplate");
 const successsTemplate = require("../templates/successTemplate");
@@ -90,9 +91,55 @@ const editAuthorHandler = async (req, res) => {
   }
 };
 
+const getAddAuthorHandler = (req, res) => {
+  try {
+    const session = req.session;
+    req.headers.authorization = "Bearer " + session.token;
+    successsTemplate(res, "add-author", "Add an Author", null, session);
+  } catch (errors) {
+    errorTemplate(
+      res,
+      "add-author",
+      "Add an Author",
+      errors,
+      messages.get_author_failed,
+      null
+    );
+  }
+};
+
+const addAuthorHandler = async (req, res) => {
+  try {
+    const session = req.session;
+    req.headers.authorization = "Bearer " + session.token;
+    await postAuthor(req);
+
+    successsTemplate(
+      res,
+      "add-author",
+      "Add an Author",
+      messages.author_added,
+      session
+    );
+  } catch (errors) {
+    errorTemplate(
+      res,
+      "add-author",
+      "Add an Author",
+      errors,
+      errors.response
+        ? errors.response.data.error.message
+        : "Oops an error has occured",
+      req.body
+    );
+  }
+};
+
 module.exports = {
   getAuthorsHandler,
   deleteAuthorHandler,
   getEditAuthorHandler,
   editAuthorHandler,
+  getAddAuthorHandler,
+  addAuthorHandler,
 };

@@ -37,7 +37,7 @@ const deleteAuthor = async (req) => {
 
 const editAuthor = async (req) => {
   const author = req.body;
-  headers(req, "put");
+  headers(req, "patch");
   const authorId = req.params.authorId;
   const result = await axios.patch(BACKEND_URL + "/authors/" + authorId, {
     name: author.name,
@@ -49,4 +49,24 @@ const editAuthor = async (req) => {
   return result;
 };
 
-module.exports = { getAllAuthors, deleteAuthor, getAuthor, editAuthor };
+const postAuthor = async (req) => {
+  const author = req.body;
+  headers(req, "post");
+
+  const result = await axios.post(BACKEND_URL + "/authors", {
+    name: author.name,
+    website: author.website,
+    about: author.about,
+    twitter: author.twitter,
+    publisher: author.publisher,
+  });
+  return result;
+};
+
+module.exports = {
+  getAllAuthors,
+  deleteAuthor,
+  getAuthor,
+  editAuthor,
+  postAuthor,
+};

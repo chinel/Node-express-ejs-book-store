@@ -42,4 +42,50 @@ const getAuthor = async (id) => {
   });
 };
 
-module.exports = { getAllAuthors, getAuthor };
+const postAuthor = async (author) => {
+  return Promise.resolve({
+    data: {
+      result: {
+        ...author,
+        _id: "6678188839bdf15d24c8eafg",
+        __v: 0,
+      },
+      message: "Author Saved.",
+    },
+  });
+};
+
+const editAuthor = async (author) => {
+  return Promise.resolve({
+    data: {
+      result: {
+        acknowledged: true,
+        modifiedCount: 1,
+        upsertedId: null,
+        upsertedCount: 0,
+        matchedCount: 1,
+      },
+      message: "Author updated.",
+    },
+  });
+};
+
+const deleteAuthor = async (authorId) => {
+  return Promise.resolve({
+    data: {
+      result: {
+        acknowledged: true,
+        deletedCount: 1,
+      },
+      message: "Author deleted.",
+    },
+  });
+};
+
+module.exports = {
+  getAllAuthors,
+  getAuthor,
+  postAuthor,
+  editAuthor,
+  deleteAuthor,
+};

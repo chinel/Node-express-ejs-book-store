@@ -1,4 +1,10 @@
-const { getAllAuthors, getAuthor } = require("./authorsService");
+const {
+  getAllAuthors,
+  getAuthor,
+  postAuthor,
+  editAuthor,
+  deleteAuthor,
+} = require("./authorsService");
 
 jest.mock("./authorsService");
 describe("Test Author Service calls backend", () => {
@@ -28,7 +34,54 @@ describe("Test Author Service calls backend", () => {
     expect(authors[0].website).toEqual("https://google.com");
     expect(authors[0].twitter).toEqual("");
   });
-  test("Should save a new author", () => {});
-  test("Should edit an author by ID", () => {});
-  test("Should delete an author by ID", () => {});
+  test("Should save a new author", async () => {
+    const author = {
+      name: "Peter Doe",
+      website: "www.peter.com",
+      about: "I am an author from with PHD",
+      twitter: "",
+      publisher: "Limited Publishers",
+    };
+    const response = await postAuthor(author);
+    const result = response.data.result;
+    const message = response.data.message;
+
+    expect(result.name).toEqual(author.name);
+    expect(result.website).toEqual(author.website);
+    expect(result.about).toEqual(author.about);
+    expect(result.twitter).toEqual(author.twitter);
+    expect(result._id).toEqual("6678188839bdf15d24c8eafg");
+    expect(message).toEqual("Author Saved.");
+  });
+  test("Should edit an author by ID", async () => {
+    const author = {
+      name: "Peter Doe 101",
+      website: "www.peter.com",
+      about: "I am an author from with PHD",
+      twitter: "",
+      publisher: "Limited Publishers!!!!",
+      _id: "6678188839bdf15d24c8eafg",
+    };
+    const response = await editAuthor(author);
+    const result = response.data.result;
+    const message = response.data.message;
+
+    expect(result.acknowledged).toBe(true);
+    expect(result.modifiedCount).toEqual(1);
+    expect(result.upsertedId).toBe(null);
+    expect(result.upsertedCount).toEqual(0);
+    expect(result.matchedCount).toEqual(1);
+    expect(message).toBe("Author updated.");
+  });
+  test("Should delete an author by ID", async () => {
+    const authorId = "6678188839bdf15d24c8eafg";
+
+    const response = await deleteAuthor(authorId);
+    const result = response.data.result;
+    const message = response.data.message;
+
+    expect(result.acknowledged).toBe(true);
+    expect(result.deletedCount).toEqual(1);
+    expect(message).toEqual("Author deleted.");
+  });
 });

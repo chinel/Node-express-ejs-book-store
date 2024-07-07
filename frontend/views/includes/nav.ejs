@@ -22,22 +22,28 @@
         <% if(typeof(session) != "undefined" && typeof(session.logged) !=
         "undefined" ){%>
         <li class="nav-item">
-          <a class="nav-link" href="/books">Books</a>
+          <a name="books" id="books" class="nav-link" href="/books">Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/authors">Authors</a>
+          <a name="authors" id="authors" class="nav-link" href="/authors"
+            >Authors</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+          <a name="logout" id="logout" class="nav-link" href="/logout"
+            >Logout</a
+          >
         </li>
 
         <% } else { %>
 
         <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
+          <a name="register" id="register" class="nav-link" href="/register"
+            >Register</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a name="login" id="login" class="nav-link" href="/login">Login</a>
         </li>
         <% } %>
       </ul>

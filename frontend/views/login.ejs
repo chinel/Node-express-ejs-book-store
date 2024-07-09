@@ -29,7 +29,7 @@
           <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
           <h2 class="text-white mb-5">Login!</h2>
           <% if (typeof(message) !=="undefined" ) { %>
-          <div <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
+          <div id="message" <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
             <%= message %></div>
           <% } %>
           <form class="form-signup" id="contactForm" action="/login" method="post">

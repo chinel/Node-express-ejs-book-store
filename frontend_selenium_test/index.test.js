@@ -38,6 +38,11 @@ describe("Test Frontend for Book store", () => {
 
   it("As a user I should be able to register on the website.", async () => {
     firstName = await registerUser();
+    await driver.wait(until.titleContains("Login"), 2000);
+    const title = await testTitle("Login");
+    expect(title).toEqual("Login");
+    const message = await driver.findElement(By.id("message")).getText();
+    expect(message).toEqual("Registration Successful");
     await setDelay();
   });
 });

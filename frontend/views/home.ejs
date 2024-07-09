@@ -39,7 +39,7 @@
           <div class="text-center">
             <% if (typeof(session) !== "undefined" && typeof(session.name) !==
             "undefined") { %>
-            <div class="me-4 text-capitalize welcome-message">
+            <div id="message" class="me-4 text-capitalize welcome-message">
               Welcome <%= session.name %>
             </div>
             <% } %>

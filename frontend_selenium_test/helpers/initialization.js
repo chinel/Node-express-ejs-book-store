@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { Builder, By, Key } = require("selenium-webdriver");
+const { Builder, By, Key, until } = require("selenium-webdriver");
 require("dotenv").config();
 let driver,
   firstName,
@@ -84,4 +84,29 @@ const registerUser = async () => {
   return firstName;
 };
 
-module.exports = { init, die, getUrl, setDelay, testTitle, registerUser };
+const loginUser = async () => {
+  const loginElement = await driver.findElement(By.id("login"));
+  loginElement.click();
+  await driver.wait(until.titleContains("Login"), 2000);
+  const emailElement = await driver.findElement(By.name("email"));
+  await emailElement.sendKeys(email, Key.TAB);
+
+  const passwordElement = await driver.findElement(By.name("password"));
+  await passwordElement.sendKeys(password, Key.TAB);
+
+  let buttonElement = await driver.findElement(By.id("submitButton"));
+  await setDelay();
+  buttonElement.sendKeys(Key.ENTER);
+  //buttonElement.click(); or this works as well
+  await setDelay();
+};
+
+module.exports = {
+  init,
+  die,
+  getUrl,
+  setDelay,
+  testTitle,
+  registerUser,
+  loginUser,
+};

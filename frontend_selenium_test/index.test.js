@@ -52,7 +52,8 @@ describe("Test Frontend for Book store", () => {
     await driver.wait(until.titleContains("Home"));
     const title = await testTitle();
     expect(title).toEqual("Home");
-    const message = driver.findElement(By.id("message")).getText();
+    const message = await driver.findElement(By.id("greeting")).getText();
+    await setDelay();
     expect(message).toEqual(`Welcome ${firstName}`);
     await setDelay();
   });
@@ -63,5 +64,19 @@ describe("Test Frontend for Book store", () => {
     await driver.wait(until.titleContains("Books"), 2000);
     const title = await testTitle();
     expect(title).toEqual("Books");
+    await setDelay();
+  });
+
+  it("As a user I want to click and view the add books page", async () => {
+    const addbookBtnElement = await driver.findElement(By.id("add-book"));
+    await setDelay();
+    await addbookBtnElement.click();
+    await setDelay();
+    await driver.wait(until.titleContains("Add a book"), 4000);
+    const title = await testTitle();
+    const bookTitle = await driver.findElement(By.id("title")).getText();
+    expect(title).toEqual("Add a book");
+    expect(bookTitle).toEqual("Add Book!");
+    await setDelay();
   });
 });

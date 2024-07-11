@@ -28,7 +28,7 @@
       <div class="d-flex justify-content-center">
         <div class="text-center">
           <% if (typeof(message) !=="undefined" ) { %>
-          <div <% if( typeof(errors)==="undefined" ){ %> class="" <% } else { %> class="alert alert-danger me-4" <%
+          <div id="message" <% if( typeof(errors)==="undefined" ){ %> class="" <% } else { %> class="alert alert-danger me-4" <%
                     } %>>
             <%= message %>
           </div>

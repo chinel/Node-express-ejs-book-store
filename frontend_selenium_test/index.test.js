@@ -7,12 +7,13 @@ const {
   setDelay,
   registerUser,
   loginUser,
+  addBook,
 } = require("./helpers/initialization");
 
 describe("Test Frontend for Book store", () => {
   jest.setTimeout(100000); // Timeout set to 10 seconds
 
-  let driver, firstName;
+  let driver, firstName, bookTitle;
   beforeAll(() => {
     driver = init();
   });
@@ -77,6 +78,16 @@ describe("Test Frontend for Book store", () => {
     const bookTitle = await driver.findElement(By.id("title")).getText();
     expect(title).toEqual("Add a book");
     expect(bookTitle).toEqual("Add Book!");
+    await setDelay();
+  });
+
+  it("As a user I want to be able to add a book", async () => {
+    bookTitle = await addBook();
+    await driver.wait(until.titleContains("Add a book"), 2000);
+    const title = await testTitle();
+    expect(title).toEqual("Add a book");
+    const message = await driver.findElement(By.id("message")).getText();
+    expect(message).toEqual("Book saved successfully");
     await setDelay();
   });
 });

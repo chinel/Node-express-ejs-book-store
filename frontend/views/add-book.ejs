@@ -59,34 +59,29 @@
                 <i class="fa fa-book fa-2x mb-2"></i>
                 <h2 id="title" class="mb-5">Add Book!</h2>
                 <% if (message !== null ) { %>
-                <div <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
+                <div id="message" <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
                   <%= message %></div>
                 <% } %>
             <form class="form-signup"  action="/books/addbook" method="post">
               <div class="row input-group-newsletter gap-4">
                 <div class="row">
-                  <input required class="form-control" id="title" type="text" placeholder="Enter Book title..." aria-label="Enter email
-                      address..." name="title" <% if(typeof(body) !=="undefined" )
+                  <input required class="form-control" id="title" type="text" placeholder="Enter Book title..." aria-label="Enter Book tile..." name="title" <% if(typeof(body) !=="undefined" )
                       {%> value="<%= body.title%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="ISBN" type="text" placeholder="Enter ISBN..." aria-label="Enter email
-                      address..." name="ISBN" <% if(typeof(body) !=="undefined" )
+                  <input required class="form-control" id="ISBN" type="text" placeholder="Enter ISBN..." aria-label="Enter ISBN..." name="ISBN" <% if(typeof(body) !=="undefined" )
                       {%> value="<%= body.ISBN%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="numberOfPages" type="number" placeholder="Number of pages..." aria-label="Enter email
-                      address..." name="numberOfPages" <% if(typeof(body) !=="undefined" )
+                  <input required class="form-control" id="numberOfPages" type="number" placeholder="Number of pages..." aria-label="Number of pages..." name="numberOfPages" <% if(typeof(body) !=="undefined" )
                       {%> value="<%= body.numberOfPages%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="price" type="number" min="0" placeholder="Price..." aria-label="Enter email
-                      address..." name="price" <% if(typeof(body) !=="undefined" )
+                  <input required class="form-control" id="price" type="number" min="0" placeholder="Price..." aria-label="Price..." name="price" <% if(typeof(body) !=="undefined" )
                       {%> value="<%= body.price%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="yearPublished" type="number" min="0" placeholder="Year released..." aria-label="Enter email
-                      address..." name="yearPublished" <% if(typeof(body) !=="undefined" )
+                  <input required class="form-control" id="yearPublished" type="number" min="0" placeholder="Year released..." aria-label="Year released..." name="yearPublished" <% if(typeof(body) !=="undefined" )
                       {%> value="<%= body.yearPublished%>" <%}%> /> 
                 </div>
                 <div class="row">

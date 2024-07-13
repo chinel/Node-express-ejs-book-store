@@ -1,5 +1,7 @@
 const crypto = require("crypto");
 const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Select } = require("selenium-webdriver/lib/select");
+
 require("dotenv").config();
 let driver,
   firstName,
@@ -10,7 +12,8 @@ let driver,
   zipCode,
   email,
   password,
-  confirmPassword;
+  confirmPassword,
+  bookTitle;
 
 const init = () => {
   driver = new Builder().forBrowser("chrome").build(); //this will build a driver for us
@@ -101,6 +104,38 @@ const loginUser = async () => {
   await setDelay();
 };
 
+const addBook = async () => {
+  const titleElement = await driver.findElement(By.name("title"));
+  bookTitle = "A day in the life.";
+  await titleElement.sendKeys(bookTitle, Key.TAB);
+
+  const ISBNElement = await driver.findElement(By.id("ISBN"));
+  const ISBN = "10-999922-29334";
+  await ISBNElement.sendKeys(ISBN, Key.TAB);
+
+  const numberPagesElement = await driver.findElement(By.id("numberOfPages"));
+  const numberOfPages = 200;
+  await numberPagesElement.sendKeys(numberOfPages, Key.TAB);
+
+  const priceElement = await driver.findElement(By.id("price"));
+  const price = 300;
+  await priceElement.sendKeys(price, Key.TAB);
+
+  const yearElement = await driver.findElement(By.id("yearPublished"));
+  const year = 2003;
+  await yearElement.sendKeys(year, Key.TAB);
+
+  const authorElement = await driver.findElement(By.id("author"));
+  const selectDropdown = new Select(authorElement);
+  await selectDropdown.selectByIndex(1); // index starts from 0
+  await authorElement.sendKeys(Key.TAB);
+
+  const buttonElement = await driver.findElement(By.id("submitButton"));
+  await setDelay();
+  await buttonElement.click();
+  await setDelay();
+};
+
 module.exports = {
   init,
   die,
@@ -109,4 +144,5 @@ module.exports = {
   testTitle,
   registerUser,
   loginUser,
+  addBook,
 };

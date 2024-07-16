@@ -54,11 +54,12 @@ const getAddBookHandler = async (req, res) => {
 };
 
 const addBookHandler = async (req, res) => {
+  let authors;
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
     const getAuthors = await getAllAuthors(req);
-    const authors = session.authors ? session.authors : getAuthors.data.result;
+    authors = session.authors ? session.authors : getAuthors.data.result;
     const result = await addBook(req);
     successsTemplate(
       res,
@@ -67,7 +68,7 @@ const addBookHandler = async (req, res) => {
       messages.book_added,
       session,
       {
-        authors: authors,
+        authors,
       }
     );
   } catch (err) {
@@ -79,7 +80,10 @@ const addBookHandler = async (req, res) => {
       err.response
         ? err.response.data.error.message
         : "Oops an error has occured",
-      req.body
+      req.body,
+      {
+        authors,
+      }
     );
   }
 };
@@ -88,17 +92,16 @@ const getEditBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = session.authors
-      ? session.authors
-      : await getAllAuthors(req);
+    const getAuthors = await getAllAuthors(req);
+    authors = session.authors ? session.authors : getAuthors.data.result;
     const book = await getBook(req);
 
     successsTemplate(res, "edit-book", "Edit book", null, session, {
-      authors: authors.data.result,
+      authors: authors,
       body: book.data.result,
     });
   } catch (errors) {
-    console.log(errors.response.data);
+    console.log(errors);
     errorTemplate(
       res,
       "edit-book",
@@ -114,20 +117,19 @@ const editBookHandler = async (req, res) => {
   try {
     const session = req.session;
     req.headers.authorization = "Bearer " + session.token;
-    const authors = session.authors
-      ? session.authors
-      : await getAllAuthors(req);
+    const getAuthors = await getAllAuthors(req);
+    authors = session.authors ? session.authors : getAuthors.data.result;
     const result = await editBook(req);
     const book = await getBook(req);
 
     successsTemplate(
       res,
       "edit-book",
-      "Edit a book",
+      "Edit book",
       messages.book_updated,
       session,
       {
-        authors: authors.data.result,
+        authors,
         body: book.data.result,
       }
     );
@@ -135,7 +137,7 @@ const editBookHandler = async (req, res) => {
     errorTemplate(
       res,
       "edit-book",
-      "Edit a book",
+      "Edit book",
       err,
       err.response
         ? err.response.data.error.message

@@ -27,13 +27,13 @@
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
       <div class="d-flex justify-content-center">
         <div class="text-center">
-          <% if (typeof(message) !=="undefined" ) { %>
-          <div <% if( typeof(errors)==="undefined" ){ %> class="" <% } else { %> class="alert alert-danger me-4" <%
+          <% if (message !== null  ) { %>
+          <div id="message" <% if( typeof(errors)==="undefined" ){ %> class="alert alert-success me-4" <% } else { %> class="alert alert-danger me-4" <%
                     } %>>
             <%= message %>
           </div>
           <% } %>
-          <h1 class="mx-auto my-0 text-uppercase">Edit Book</h1>
+          <h1 class="mx-auto my-0 text-uppercase" >Edit Book</h1>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="row gx-4 gy-4 ">
             <div class="col-md-10 col-lg-6 mx-auto text-center">
                 <i class="fa fa-book fa-2x mb-2"></i>
-                <h2 class="mb-5">Edit Book!</h2>
+                <h2 id="formHeader" class="mb-5">Edit Book!</h2>
                 <% if (message !== null ) { %>
                 <div <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
                   <%= message %></div>
@@ -68,28 +68,23 @@
               <div class="row input-group-newsletter gap-4">
                 <%- console.log(typeof(data)) %>
                 <div class="row">
-                  <input required class="form-control" id="title" type="text" placeholder="Enter Book title..." aria-label="Enter email
-                      address..." name="title" <% if(typeof(data) !== "undefined" )
+                  <input required class="form-control" id="title" type="text" placeholder="Enter Book title..." aria-label="Enter Book title..." name="title" <% if(typeof(data) !== "undefined" )
                       {%> value="<%= data.body.title%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="ISBN" type="text" placeholder="Enter ISBN..." aria-label="Enter email
-                      address..." name="ISBN" <% if(typeof(data) !== "undefined" )
+                  <input required class="form-control" id="ISBN" type="text" placeholder="Enter ISBN..." aria-label="Enter ISBN..." name="ISBN" <% if(typeof(data) !== "undefined" )
                       {%> value="<%= data.body.ISBN%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="numberOfPages" type="number" placeholder="Number of pages..." aria-label="Enter email
-                      address..." name="numberOfPages" <% if(typeof(data) !== "undefined" )
+                  <input required class="form-control" id="numberOfPages" type="number" placeholder="Number of pages..." aria-label="Number of pages..." name="numberOfPages" <% if(typeof(data) !== "undefined" )
                       {%> value="<%= data.body.numberOfPages%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="price" type="number" min="0" placeholder="Price..." aria-label="Enter email
-                      address..." name="price" <% if(typeof(data) !== "undefined" )
+                  <input required class="form-control" id="price" type="number" min="0" placeholder="Price..." aria-label="Price..." name="price" <% if(typeof(data) !== "undefined" )
                       {%> value="<%= data.body.price%>" <%}%> /> 
                 </div>
                 <div class="row">
-                  <input required class="form-control" id="yearPublished" type="number" min="0" placeholder="Year released..." aria-label="Enter email
-                      address..." name="yearPublished" <% if(typeof(data) !== "undefined" )
+                  <input required class="form-control" id="yearPublished" type="number" min="0" placeholder="Year released..." aria-label="Year released..." name="yearPublished" <% if(typeof(data) !== "undefined" )
                       {%> value="<%= data.body.yearPublished%>" <%}%> /> 
                 </div>
                 <div class="row">

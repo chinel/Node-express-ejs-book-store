@@ -37,7 +37,7 @@ app.use("/", userRouter);
 app.use("/books", bookRouter);
 app.use("/authors", authorRouter);
 app.use((req, res) => {
-  req.session.destroy(null);
-  res.status(404).render("404",{pageTitle:"404"});
+  //req.session.destroy(null);
+  res.status(404).render("404", { pageTitle: "404", session });
 });
 module.exports = app;

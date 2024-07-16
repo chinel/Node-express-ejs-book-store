@@ -8,6 +8,7 @@ const {
   registerUser,
   loginUser,
   addBook,
+  editBook,
 } = require("./helpers/initialization");
 
 describe("Test Frontend for Book store", () => {
@@ -68,16 +69,16 @@ describe("Test Frontend for Book store", () => {
     await setDelay();
   });
 
-  it("As a user I want to click and view the add books page", async () => {
+  it("As a user I want to click and view the add book page", async () => {
     const addbookBtnElement = await driver.findElement(By.id("add-book"));
     await setDelay();
     await addbookBtnElement.click();
     await setDelay();
     await driver.wait(until.titleContains("Add a book"), 4000);
     const title = await testTitle();
-    const bookTitle = await driver.findElement(By.id("title")).getText();
     expect(title).toEqual("Add a book");
-    expect(bookTitle).toEqual("Add Book!");
+    const formHeader = await driver.findElement(By.id("formHeader")).getText();
+    expect(formHeader).toEqual("Add Book!");
     await setDelay();
   });
 
@@ -88,6 +89,45 @@ describe("Test Frontend for Book store", () => {
     expect(title).toEqual("Add a book");
     const message = await driver.findElement(By.id("message")).getText();
     expect(message).toEqual("Book saved successfully");
+    await setDelay();
+  });
+
+  it("As a user I want to click and view the edit book page", async () => {
+    const bookElement = await driver.findElement(By.id("books"));
+    await setDelay();
+    await bookElement.click();
+    await driver.wait(until.titleContains("Books"), 4000);
+    const editBookBtnElement = await driver.findElements(
+      By.className("edit-link")
+    );
+    if (editBookBtnElement.length > 0) {
+      const lastBookBtn = editBookBtnElement[editBookBtnElement.length - 1];
+      await setDelay();
+
+      //await lastBookBtn.click();
+      await driver.executeScript("arguments[0].click();", lastBookBtn);
+
+      await setDelay();
+      await driver.wait(until.titleContains("Edit book"), 4000);
+      const title = await testTitle();
+      expect(title).toEqual("Edit book");
+      const formHeader = await driver
+        .findElement(By.id("formHeader"))
+        .getText();
+      expect(formHeader).toEqual("Edit Book!");
+    } else {
+      console.log("No book found.");
+    }
+    await setDelay();
+  });
+
+  it("As a user I want to be able to update a book", async () => {
+    await editBook();
+    await driver.wait(until.titleContains("Edit book"), 4000);
+    const title = await testTitle();
+    expect(title).toEqual("Edit book");
+    const message = await driver.findElement(By.id("message")).getText();
+    expect(message).toEqual("Book updated successfully.");
     await setDelay();
   });
 });

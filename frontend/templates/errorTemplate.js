@@ -1,6 +1,6 @@
 const { messages } = require("../utilities/utils");
 
-const errorTemplate = (res, page, pageTitle, errors, message, body) => {
+const errorTemplate = (res, page, pageTitle, errors, message, body, data) => {
   const errResponse = errors.response;
   if (
     errResponse &&
@@ -20,6 +20,7 @@ const errorTemplate = (res, page, pageTitle, errors, message, body) => {
       errors,
       body,
       message,
+      data,
     });
   }
 };

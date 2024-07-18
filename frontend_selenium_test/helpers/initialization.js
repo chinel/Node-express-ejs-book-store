@@ -41,38 +41,36 @@ const randNum = () => {
   return Math.ceil(Math.random() * 100000);
 };
 
+const sendPayload = async (element, payload) => {
+  const inputElement = await driver.findElement(By.id(element));
+  await inputElement.clear();
+  await inputElement.sendKeys(payload, Key.TAB);
+};
+
 const registerUser = async () => {
-  const firstNameElement = await driver.findElement(By.name("firstName"));
   firstName = "Jane";
-  await firstNameElement.sendKeys(firstName, Key.TAB);
+  await sendPayload("firstName", firstName);
 
-  const lastNameElement = await driver.findElement(By.name("lastName"));
   lastName = "Doe";
-  lastNameElement.sendKeys(lastName, Key.TAB);
+  await sendPayload("lastName", lastName);
 
-  const addressElement = await driver.findElement(By.name("address"));
   address = "Main St 123";
-  addressElement.sendKeys(address, Key.TAB);
+  await sendPayload("address", address);
 
-  const stateElement = await driver.findElement(By.name("state"));
   state = "Lagos";
-  await stateElement.sendKeys(state, Key.TAB);
+  await sendPayload("state", state);
 
-  const cityElement = await driver.findElement(By.name("city"));
   city = "MainCity";
-  await cityElement.sendKeys(city, Key.TAB);
+  await sendPayload("city", city);
 
-  const zipCodeElement = await driver.findElement(By.name("zipCode"));
   zipCode = "100001";
-  await zipCodeElement.sendKeys(zipCode, Key.TAB);
+  await sendPayload("zipCode", zipCode);
 
-  const emailElement = await driver.findElement(By.name("email"));
   email = `nelokwaz+new${randNum()}@gmail.com`;
-  await emailElement.sendKeys(email, Key.TAB);
+  await sendPayload("email", email);
 
-  const passwordElement = await driver.findElement(By.name("password"));
   password = "PAssword123";
-  await passwordElement.sendKeys(password, Key.TAB);
+  await sendPayload("password", password);
 
   const confirmPasswordElement = await driver.findElement(
     By.name("confirmPassword")
@@ -91,11 +89,9 @@ const loginUser = async () => {
   const loginElement = await driver.findElement(By.id("login"));
   loginElement.click();
   await driver.wait(until.titleContains("Login"), 2000);
-  const emailElement = await driver.findElement(By.name("email"));
-  await emailElement.sendKeys(email, Key.TAB);
 
-  const passwordElement = await driver.findElement(By.name("password"));
-  await passwordElement.sendKeys(password, Key.TAB);
+  await sendPayload("email", email);
+  await sendPayload("password", password);
 
   let buttonElement = await driver.findElement(By.id("submitButton"));
   await setDelay();
@@ -105,25 +101,14 @@ const loginUser = async () => {
 };
 
 const addBook = async () => {
-  const titleElement = await driver.findElement(By.name("title"));
   bookTitle = `A day in the life ${randNum()}`;
-  await titleElement.sendKeys(bookTitle, Key.TAB);
-
-  const ISBNElement = await driver.findElement(By.id("ISBN"));
-  const ISBN = "10-999922-29334";
-  await ISBNElement.sendKeys(ISBN, Key.TAB);
-
-  const numberPagesElement = await driver.findElement(By.id("numberOfPages"));
-  const numberOfPages = 200;
-  await numberPagesElement.sendKeys(numberOfPages, Key.TAB);
-
-  const priceElement = await driver.findElement(By.id("price"));
-  const price = 300;
-  await priceElement.sendKeys(price, Key.TAB);
-
-  const yearElement = await driver.findElement(By.id("yearPublished"));
-  const year = 2003;
-  await yearElement.sendKeys(year, Key.TAB);
+  await sendPayload("title", bookTitle);
+  // const titleElement = await driver.findElement(By.name("title"));
+  // await titleElement.sendKeys(bookTitle, Key.TAB);
+  await sendPayload("ISBN", "10-999922-29334");
+  await sendPayload("numberOfPages", 200);
+  await sendPayload("price", 300);
+  await sendPayload("yearPublished", 2003);
 
   const authorElement = await driver.findElement(By.id("author"));
   const selectDropdown = new Select(authorElement);
@@ -138,30 +123,12 @@ const addBook = async () => {
 };
 
 const editBook = async () => {
-  const titleElement = await driver.findElement(By.name("title"));
   bookTitle = `A day in the life ${randNum()}`;
-  await titleElement.clear(); // this clears the input element
-  await titleElement.sendKeys(bookTitle, Key.TAB);
-
-  const ISBNElement = await driver.findElement(By.id("ISBN"));
-  const ISBN = "10-999922-29134";
-  await ISBNElement.clear();
-  await ISBNElement.sendKeys(ISBN, Key.TAB);
-
-  const numberPagesElement = await driver.findElement(By.id("numberOfPages"));
-  const numberOfPages = 199;
-  await numberPagesElement.clear();
-  await numberPagesElement.sendKeys(numberOfPages, Key.TAB);
-
-  const priceElement = await driver.findElement(By.id("price"));
-  const price = 299;
-  await priceElement.clear();
-  await priceElement.sendKeys(price, Key.TAB);
-
-  const yearElement = await driver.findElement(By.id("yearPublished"));
-  const year = 2004;
-  await yearElement.clear();
-  await yearElement.sendKeys(year, Key.TAB);
+  await sendPayload("title", bookTitle);
+  await sendPayload("ISBN", "10-999922-29134");
+  await sendPayload("numberOfPages", 199);
+  await sendPayload("price", 299);
+  await sendPayload("yearPublished", 2004);
 
   const authorElement = await driver.findElement(By.id("author"));
   const selectDropdown = new Select(authorElement);
@@ -175,26 +142,14 @@ const editBook = async () => {
 };
 
 const addAuthor = async () => {
-  const authorNameElement = await driver.findElement(By.id("name"));
-  const authorName = `Peter Doe ${randNum()}`;
-  await authorNameElement.sendKeys(authorName, Key.TAB);
-
-  const authorPublisherElement = await driver.findElement(By.id("publisher"));
-  const publisher = "Pearson Publishers";
-  await authorPublisherElement.sendKeys(publisher, Key.TAB);
-
-  const authorWebsiteElement = await driver.findElement(By.id("website"));
-  const website = "www.peterdoe.com";
-  await authorWebsiteElement.sendKeys(website, Key.TAB);
-
-  const authorTwitterElement = await driver.findElement(By.id("twitter"));
-  const twitter = "@peter";
-  await authorTwitterElement.sendKeys(twitter, Key.TAB);
-
-  const authorAboutElement = await driver.findElement(By.id("about"));
-  const about =
-    "I am an author based in Luxemborg. With over 50 books published";
-  await authorAboutElement.sendKeys(about, Key.TAB);
+  await sendPayload("name", `Peter Doe ${randNum()}`);
+  await sendPayload("publisher", "Pearson Publishers");
+  await sendPayload("website", "www.peterdoe.com");
+  await sendPayload("twitter", "@peter");
+  await sendPayload(
+    "about",
+    "I am an author based in Luxemborg. With over 50 books published"
+  );
 
   const submitButtonElement = await driver.findElement(By.id("submitButton"));
   await setDelay();

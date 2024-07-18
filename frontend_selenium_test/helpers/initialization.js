@@ -174,6 +174,34 @@ const editBook = async () => {
   await setDelay();
 };
 
+const addAuthor = async () => {
+  const authorNameElement = await driver.findElement(By.id("name"));
+  const authorName = `Peter Doe ${randNum()}`;
+  await authorNameElement.sendKeys(authorName, Key.TAB);
+
+  const authorPublisherElement = await driver.findElement(By.id("publisher"));
+  const publisher = "Pearson Publishers";
+  await authorPublisherElement.sendKeys(publisher, Key.TAB);
+
+  const authorWebsiteElement = await driver.findElement(By.id("website"));
+  const website = "www.peterdoe.com";
+  await authorWebsiteElement.sendKeys(website, Key.TAB);
+
+  const authorTwitterElement = await driver.findElement(By.id("twitter"));
+  const twitter = "@peter";
+  await authorTwitterElement.sendKeys(twitter, Key.TAB);
+
+  const authorAboutElement = await driver.findElement(By.id("about"));
+  const about =
+    "I am an author based in Luxemborg. With over 50 books published";
+  await authorAboutElement.sendKeys(about, Key.TAB);
+
+  const submitButtonElement = await driver.findElement(By.id("submitButton"));
+  await setDelay();
+  await submitButtonElement.click();
+  await setDelay();
+};
+
 module.exports = {
   init,
   die,
@@ -184,4 +212,5 @@ module.exports = {
   loginUser,
   addBook,
   editBook,
+  addAuthor,
 };

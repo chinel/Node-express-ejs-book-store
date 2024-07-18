@@ -9,6 +9,7 @@ const {
   loginUser,
   addBook,
   editBook,
+  addAuthor,
 } = require("./helpers/initialization");
 
 describe("Test Frontend for Book store", () => {
@@ -150,6 +151,16 @@ describe("Test Frontend for Book store", () => {
     expect(title).toEqual("Add an Author");
     const formHeader = await driver.findElement(By.id("formHeader")).getText();
     expect(formHeader).toEqual("Add Author!");
+    await setDelay();
+  });
+
+  it("As a user I want to be able to add an author", async () => {
+    await addAuthor();
+    await driver.wait(until.titleContains("Add an Author"));
+    const title = await testTitle();
+    expect(title).toEqual("Add an Author");
+    const message = await driver.findElement(By.id("message")).getText();
+    expect(message).toEqual("Author added successfully.");
     await setDelay();
   });
 });

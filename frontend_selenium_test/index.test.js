@@ -10,6 +10,7 @@ const {
   addBook,
   editBook,
   addAuthor,
+  editAuthor,
 } = require("./helpers/initialization");
 
 describe("Test Frontend for Book store", () => {
@@ -117,7 +118,7 @@ describe("Test Frontend for Book store", () => {
         .getText();
       expect(formHeader).toEqual("Edit Book!");
     } else {
-      console.log("No book found.");
+      console.log("No books found.");
     }
     await setDelay();
   });
@@ -161,6 +162,34 @@ describe("Test Frontend for Book store", () => {
     expect(title).toEqual("Add an Author");
     const message = await driver.findElement(By.id("message")).getText();
     expect(message).toEqual("Author added successfully.");
+    await setDelay();
+  });
+
+  it("As a user I want to click and view the edit author page", async () => {
+    const authorElement = await driver.findElement(By.id("authors"));
+    await setDelay();
+    await authorElement.click();
+    await driver.wait(until.titleContains("Authors"), 4000);
+    const editAuthorBtnElement = await driver.findElement(
+      By.className("edit-link")
+    );
+    await editAuthorBtnElement.click();
+    await setDelay();
+    await driver.wait(until.titleContains("Edit Author"), 4000);
+    const title = await testTitle();
+    expect(title).toEqual("Edit Author");
+    const formHeader = await driver.findElement(By.id("formHeader")).getText();
+    expect(formHeader).toEqual("Edit Author!");
+    await setDelay();
+  });
+
+  it("As a user I want to be able to update an author", async () => {
+    await editAuthor();
+    await driver.wait(until.titleContains("Edit Author"), 4000);
+    const title = await testTitle();
+    expect(title).toEqual("Edit Author");
+    const message = await driver.findElement(By.id("message")).getText();
+    expect(message).toEqual("Author updated successfully.");
     await setDelay();
   });
 });

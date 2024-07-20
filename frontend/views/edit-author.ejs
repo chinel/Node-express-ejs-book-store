@@ -27,8 +27,8 @@
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
       <div class="d-flex justify-content-center">
         <div class="text-center">
-          <% if (typeof(message) !=="undefined" ) { %>
-          <div <% if( typeof(errors)==="undefined" ){ %> class="" <% } else { %> class="alert alert-danger me-4" <%
+          <% if (message !== null  ) { %>
+          <div <% if( typeof(errors)==="undefined" ){ %> class="alert alert-success me-4" <% } else { %> class="alert alert-danger me-4" <%
                     } %>>
             <%= message %>
           </div>
@@ -58,9 +58,9 @@
         <div class="row gx-4 gy-4 ">
             <div class="col-md-10 col-lg-6 mx-auto text-center">
                 <i class="fa fa-book fa-2x mb-2"></i>
-                <h2 class="mb-5">Edit Author!</h2>
+                <h2 class="mb-5" id="formHeader">Edit Author!</h2>
                 <% if (message !== null ) { %>
-                <div <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
+                <div id="message" <% if( typeof(errors) ==="undefined"){ %> class="alert alert-success me-4" <% } else {  %> class="alert alert-danger me-4" <% } %>>
                   <%= message %></div>
                 <% } %>
             <form class="form-signup"  action="/authors/<% if(typeof(data) !== "undefined" )

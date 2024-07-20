@@ -157,6 +157,22 @@ const addAuthor = async () => {
   await setDelay();
 };
 
+const editAuthor = async () => {
+  await sendPayload("name", `Peter Doe ${randNum()}`);
+  await sendPayload("publisher", "Pearson Publishers!");
+  await sendPayload("website", "www.peterdoe.org");
+  await sendPayload("twitter", "@peterd");
+  await sendPayload(
+    "about",
+    "I am an author based in Austria. With over 500 books published"
+  );
+
+  const submitButtonElement = await driver.findElement(By.id("submitButton"));
+  await setDelay();
+  await submitButtonElement.click();
+  await setDelay();
+};
+
 module.exports = {
   init,
   die,
@@ -168,4 +184,5 @@ module.exports = {
   addBook,
   editBook,
   addAuthor,
+  editAuthor,
 };

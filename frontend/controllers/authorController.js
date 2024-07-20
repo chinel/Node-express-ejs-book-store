@@ -47,7 +47,7 @@ const getEditAuthorHandler = async (req, res) => {
     req.headers.authorization = "Bearer " + session.token;
 
     const author = await getAuthor(req);
-    successsTemplate(res, "edit-author", "Edit author", null, session, {
+    successsTemplate(res, "edit-author", "Edit Author", null, session, {
       body: author.data.result,
     });
   } catch (errors) {
@@ -72,7 +72,7 @@ const editAuthorHandler = async (req, res) => {
     successsTemplate(
       res,
       "edit-author",
-      "Edit author",
+      "Edit Author",
       messages.author_updated,
       session,
       {

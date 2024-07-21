@@ -192,4 +192,45 @@ describe("Test Frontend for Book store", () => {
     expect(message).toEqual("Author updated successfully.");
     await setDelay();
   });
+
+  it("As a user I want to be able to delete an author", async () => {
+    const authorsNavElement = await driver.findElement(By.id("authors"));
+    await setDelay();
+    await authorsNavElement.click();
+    await driver.wait(until.titleContains("Authors"), 4000);
+    const deleteAuthorLink = await driver.findElement(
+      By.className("delete-link")
+    );
+    await setDelay();
+    await driver.executeScript("arguments[0].click();", deleteAuthorLink);
+
+    // await deleteAuthorLink.click();
+    await driver.wait(until.alertIsPresent(), 3000);
+
+    const alert = await driver.switchTo().alert();
+    const alertText = await alert.getText();
+    expect(alertText).toEqual("Are you sure you want to delete this author!");
+
+    await alert.accept();
+    await setDelay();
+  });
+
+  it("As a user I want to be able to delete a book", async () => {
+    const bookNavElement = await driver.findElement(By.id("books"));
+    await bookNavElement.click();
+    await driver.wait(until.titleContains("Books"), 4000);
+    const deleteBooksLink = await driver.findElement(
+      By.className("delete-link")
+    );
+    await setDelay();
+    await driver.executeScript("arguments[0].click();", deleteBooksLink);
+
+    // await deleteBooksLink.click();
+    await driver.wait(until.alertIsPresent(), 3000);
+    const alert = await driver.switchTo().alert();
+    const alertText = await alert.getText();
+    expect(alertText).toEqual("Are you sure you want to delete this book!");
+    await alert.accept();
+    await setDelay();
+  });
 });

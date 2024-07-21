@@ -31,7 +31,7 @@ const updateBookMany = async (
   update,
   options = { limit: BATCH_SIZE }
 ) => {
-  let result;
+  let result, updatedCount;
   do {
     result = await Book.updateMany(filter, update, options);
     updatedCount += result.nModified;

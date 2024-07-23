@@ -233,4 +233,22 @@ describe("Test Frontend for Book store", () => {
     await alert.accept();
     await setDelay();
   });
+
+  it("As a user I want to be able to view the about page", async () => {
+    const aboutNavLink = await driver.findElement(By.id("about"));
+    await aboutNavLink.click();
+    await driver.wait(until.titleContains("About"), 3000);
+    const title = await testTitle();
+    expect(title).toEqual("About");
+    await setDelay();
+  });
+
+  it("As a user I want to be able to logout", async () => {
+    const logoutLink = await driver.findElement(By.id("logout"));
+    await logoutLink.click();
+    await driver.wait(until.titleContains("Home"), 5000);
+    const title = await testTitle();
+    expect(title).toEqual("Home");
+    await setDelay();
+  });
 });

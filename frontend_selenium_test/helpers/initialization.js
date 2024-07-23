@@ -146,10 +146,15 @@ const addAuthor = async () => {
   await sendPayload("publisher", "Pearson Publishers");
   await sendPayload("website", "www.peterdoe.com");
   await sendPayload("twitter", "@peter");
-  await sendPayload(
-    "about",
-    "I am an author based in Luxemborg. With over 50 books published"
+  const aboutElement = await driver.findElement(By.name("about"));
+  await aboutElement.sendKeys(
+    "I am an author based in Luxemborg. With over 50 books published",
+    Key.TAB
   );
+  // await sendPayload(
+  //   "about",
+  //   "I am an author based in Luxemborg. With over 50 books published"
+  // );
 
   const submitButtonElement = await driver.findElement(By.id("submitButton"));
   await setDelay();
@@ -162,10 +167,16 @@ const editAuthor = async () => {
   await sendPayload("publisher", "Pearson Publishers!");
   await sendPayload("website", "www.peterdoe.org");
   await sendPayload("twitter", "@peterd");
-  await sendPayload(
-    "about",
-    "I am an author based in Austria. With over 500 books published"
+  const aboutElement = await driver.findElement(By.name("about"));
+  await aboutElement.clear();
+  await aboutElement.sendKeys(
+    "I am an author based in Austria. With over 500 books published",
+    Key.TAB
   );
+  // await sendPayload(
+  //   "about",
+  //   "I am an author based in Austria. With over 500 books published"
+  // );
 
   const submitButtonElement = await driver.findElement(By.id("submitButton"));
   await setDelay();
